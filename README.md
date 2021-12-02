@@ -1,0 +1,3 @@
+# Twitter Clone
+
+This is a twitter clone I built using the MERN stack. This is my first ever fullstack project after practicing frontend development for quite some time – see my [Frontend Mentor challenges](https://github.com/nkhatri7/Frontend-Mentor-Challenges), and after learning backend web development I decided to build a fullstack app. I love twitter so I thought this would be a really motivating first project to try and clone my favourite social media site.
