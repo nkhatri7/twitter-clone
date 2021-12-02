@@ -1,23 +1,29 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+
+const authRoute = require('./routes/Auth');
 
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log('MongoDB database connection established successfully');
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  console.log('MongoDB database connection established successfully.');
-  client.close();
+app.use('/api/auth', authRoute);
+
+app.get('/', (req, res) => {
+  res.json('Hello');
 });
 
 app.listen(port, () => {
