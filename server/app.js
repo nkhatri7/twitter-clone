@@ -3,6 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const authRoute = require('./routes/Auth');
+const usersRoute = require('./routes/Users');
+const tweetsRoute = require('./routes/Tweets');
 
 require('dotenv').config();
 
@@ -21,10 +23,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoute);
-
-app.get('/', (req, res) => {
-  res.json('Hello');
-});
+app.use('/api/users', usersRoute);
+app.use('/api/tweets', tweetsRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

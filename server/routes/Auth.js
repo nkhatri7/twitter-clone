@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../models/UserModel');
 const bcrypt = require('bcrypt');
 
+// Create user
 router.post('/register', async (req, res) => {
     try {
         // Generate new password
@@ -20,10 +21,11 @@ router.post('/register', async (req, res) => {
         const user = await newUser.save();
         res.status(200).json(user);
     } catch (err) {
-        console.log(err);
+        res.status(500).json(err);
     }
 });
 
+// Validate user
 router.post('/login', async (req, res) => {
     try {
         // Check if user exists
@@ -37,7 +39,7 @@ router.post('/login', async (req, res) => {
         // Send back user object
         res.status(200).json(user);
     } catch (err) {
-        console.log(err);
+        res.status(500).json(err);
     }
 });
 

@@ -51,6 +51,22 @@ const UserSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    tweets: {
+        type: Array,
+        default: []
+    },
+    likes: {
+        type: Array,
+        default: []
+    },
+    retweets: {
+        type: Array,
+        default: []
+    },
+    bookmarks: {
+        type: Array,
+        default: []
+    },
     isAdmin: {
         type: Boolean,
         default: false
