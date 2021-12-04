@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
         const newTweet = new Tweet(req.body);
         const savedTweet = await newTweet.save();
         const updatedUser = await User.findByIdAndUpdate(req.body.userId, {
-            $push: { tweets: savedTweet._id }
+            $push: { tweets: savedTweet._id.valueOf() }
         }, { new: true });
         res.status(200).json({
             tweet: savedTweet,
@@ -34,8 +34,10 @@ router.put('/:id', async (req, res) => {
 // Delete tweet
 router.delete('/:id', async (req, res) => {
     try {
+        const user = await User.findByIdAndUpdate(req.body.userId, {
+            $pull: { tweets: req.params.id }
+        }, { new: true });
         await Tweet.findByIdAndDelete(req.params.id);
-        const user = await User.findById(req.body.userId);
         res.status(200).json(user);
     } catch (err) {
         res.status(500).json(err);
@@ -111,15 +113,15 @@ router.put('/:id/unlike', async (req, res) => {
 });
 
 // Reply to tweet
-router.put('/:id/reply', async (req, res) => {
+router.post('/:id/reply', async (req, res) => {
     try {
         const reply = new Tweet(req.body);
         const savedReply = await reply.save();
         const tweet = await Tweet.findByIdAndUpdate(req.params.id, {
-            $push: { replies: savedReply }
+            $push: { replies: savedReply._id.valueOf() }
         }, { new: true });
-        const user = User.findByIdAndUpdate(req.body.userId, {
-            $push: { tweets: savedReply._id }
+        const user = await User.findByIdAndUpdate(req.body.userId, {
+            $push: { tweets: savedReply._id.valueOf() }
         }, { new: true });
         res.status(200).json({
             tweet: tweet,
@@ -135,16 +137,22 @@ router.put('/:id/reply', async (req, res) => {
 router.delete('/:tweetId/delete/:replyId', async (req, res) => {
     try {
         const tweet = await Tweet.findByIdAndUpdate(req.params.tweetId, {
-            $pull: { replies: req.params.tweetId }
-        });
+            $pull: { replies: req.params.replyId }
+        }, { new: true });
+        const user = await User.findByIdAndUpdate(req.body.userId, {
+            $pull: { tweets: req.params.replyId }
+        }, { new: true });
         await Tweet.findByIdAndDelete(req.params.replyId);
-        res.status(200).json(tweet);
+        res.status(200).json({
+            tweet: tweet,
+            user: user
+        });
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-// Retweet tweet
+// Retweet
 router.put('/:id/retweet', async (req, res) => {
     try {
         const tweet = await Tweet.findByIdAndUpdate(req.params.id, {
