@@ -2,7 +2,6 @@
 
 body {
     background-color: #000000;
-    color: #FFFFFF;
 }
 
 @mixin flex-column {
@@ -13,6 +12,7 @@ body {
 }
 
 main {
+    color: rgb(217, 217, 217);
     @include flex-column();
     > .main-signup-login {
         padding: 2rem 1.8rem;
@@ -123,7 +123,7 @@ main {
 }
 
 @media screen and (min-width: 1200px) {
-    button:hover {
+    .signup-button:hover, .login-button:hover {
         cursor: pointer;
         transition: 0.5s;
     }

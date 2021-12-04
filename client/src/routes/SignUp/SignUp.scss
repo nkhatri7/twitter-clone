@@ -1,0 +1,114 @@
+@use '../../global' as g;
+
+.signup-wrapper {
+    width: 100%;
+    background-color: #000000;
+    border-radius: 10px;
+    > header {
+        position: relative;
+        width: 100%;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: center;
+        > .close {
+            height: 1rem;
+            width: 1rem;
+            border: none;
+            background: url('../../assets/images/close-icon.svg') no-repeat center;
+            position: absolute;
+            left: 1.5rem;
+            top: 1.8rem;
+            > .hidden {
+                display: none;
+            }
+        }
+        > .logo {
+            max-width: 2rem;
+        }
+    }
+    > main {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        > h1 {
+            font-size: 1.5rem;
+        }
+        > form {
+            width: 100%;
+            margin-top: 1rem;
+            > input {
+                width: 100%;
+            }
+            > input:not(input[type=submit]) {
+                background-color: transparent;
+                font-size: 1rem;
+                color: #FFFFFF;
+                padding: 0.9rem 0.5rem 0.9rem 1rem;
+                border-radius: 5px;
+                border: 1px solid #303237;
+                margin: 0.6rem 0;
+                &:focus {
+                    outline: none !important;
+                    border: 1px solid g.$primary-blue;
+                }
+            }
+            > input[type=submit] {
+                position: absolute;
+                bottom: 3rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                padding: 0.8rem 0;
+                border: none;
+                border-radius: 50px;
+                font-weight: 800;
+                font-size: 1rem;
+                &:disabled {
+                    opacity: 0.5;
+                }
+            }
+            > .error-message {
+                color: red;
+                font-size: 0.7rem;
+                padding-left: 1rem;
+                display: none;
+            }
+            > .next-btn {
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+            > .signup-btn {
+                background-color: g.$primary-blue;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 690px) {
+    .signup {
+        width: 100vw;
+        height: 100vh;
+        background-color: #262C35;
+        .signup-wrapper {
+            max-width: 675px;
+            height: 600px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    form > input[type=submit]:hover {
+        cursor: pointer;
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+}
