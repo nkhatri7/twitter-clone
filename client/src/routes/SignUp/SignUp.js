@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import './SignUp.scss';
-import twitterLogo from '../../assets/images/twitter-logo.png';
+import AuthHeader from '../../components/AuthHeader/AuthHeader';
 
-const SignUp = ({ handleCompletedSignup }) => {
+const SignUp = ({ handleSetActiveUser }) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -23,10 +23,6 @@ const SignUp = ({ handleCompletedSignup }) => {
     const confirmedPasswordErrorMessage = useRef();
 
     const navigate = useNavigate();
-
-    const handleClose = () => {
-        navigate('/');
-    }
 
     const handleEmailChange = e => {
         setEmail(e.target.value);
@@ -73,13 +69,13 @@ const SignUp = ({ handleCompletedSignup }) => {
                     emailElement.current.style.border = '1px solid #303237';
                     setEmailAvailable(true);
                     usernameElement.current.focus();
-                } else {
-                    console.log('Unknown error');
                 }
             }).catch(err => {
                 if (err.response.status === 403) {
                     emailErrorMessage.current.style.display = 'block';
                     emailElement.current.style.border = '1px solid red';
+                } else {
+                    console.log('Unknown error');
                 }
             });
     }
@@ -99,21 +95,23 @@ const SignUp = ({ handleCompletedSignup }) => {
                 password: password,
                 displayName: name
             };
-            
+
             axios.post('http://localhost:5000/api/auth/signup', user)
-                .then(async res => {
+                .then(res => {
                     if (res.status === 200) {
                         usernameErrorMessage.current.style.display = 'none';
                         usernameElement.current.style.border = '1px solid #303237';
                         
-                        const user = await res.data;
-                        handleCompletedSignup(user);
+                        const user = res.data;
+                        handleSetActiveUser(user);
                         navigate('/home');
                     }
                 }).catch(err => {
                     if (err.response.status === 403) {
                         usernameErrorMessage.current.style.display = 'block';
                         usernameElement.current.style.border = '1px solid red';
+                    } else {
+                        console.log('Unknown error');
                     }
                 });
         }
@@ -122,31 +120,26 @@ const SignUp = ({ handleCompletedSignup }) => {
     return (
         <div className="signup">
             <div className="signup-wrapper">
-                <header>
-                    <button className="close" aria-label="Go back to previous screen" onClick={handleClose}>
-                        <span className="hidden">Back</span>
-                    </button>
-                    <img src={twitterLogo} alt="Twitter logo" className="logo" />
-                </header>
+                <AuthHeader />
                 <main>
                     <h1>Create your account</h1>
                     {emailAvailable === false ? 
                         <form onSubmit={handleEmailValidation}>
-                            <input type="text" name="displayName" id="displayName" placeholder="Name" 
+                            <input type="text" name="displayName" placeholder="Name" 
                                 value={name} onChange={handleNameChange} tabIndex={0} />
-                            <input type="email" name="email" id="email" placeholder="Email" 
+                            <input type="email" name="email" placeholder="Email" 
                                 value={email} onChange={handleEmailChange} ref={emailElement} tabIndex={1} />
                             <span className="error-message" ref={emailErrorMessage}>Email has already been taken.</span>
                             <input className="next-btn" type="submit" value="Next" disabled={nextDisabled} tabIndex={2} />
                         </form>  
                         :
                         <form onSubmit={handleSignUp}>
-                            <input type="text" name="username" id="username" placeholder="Username" 
+                            <input type="text" name="username" placeholder="Username" 
                                 value={username} onChange={handleUsernameChange} ref={usernameElement} tabIndex={3} />
                             <span className="error-message" ref={usernameErrorMessage}>Username already taken.</span>
-                            <input type="password" name="password" id="password" placeholder="Password" 
+                            <input type="password" name="password" placeholder="Password" 
                                 value={password} onChange={handlePasswordChange} tabIndex={4} />
-                            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" 
+                            <input type="password" name="confirmPassword" placeholder="Confirm Password" 
                                 value={confirmedPassword} onChange={handleConfirmedPasswordChange} ref={confirmedPasswordElement}
                                 tabIndex={5} />
                             <span className="error-message" ref={confirmedPasswordErrorMessage}>Passwords do not match.</span>

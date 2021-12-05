@@ -48,16 +48,49 @@ router.post('/signup/email', async (req, res) => {
 // Validate user
 router.post('/login', async (req, res) => {
     try {
+        let user = {};
         // Check if user exists
-        const user = await User.findOne({username: req.body.username});
-        !user && res.status(404).json('User not found');
+        // Check if request uses email or username
+        if (req.body.userLoginDetail.includes('@')) {
+            user = await User.findOne({email: req.body.userLoginDetail});
+        } else {
+            user = await User.findOne({username: req.body.userLoginDetail});
+        }
+        
+        if (!user) {
+            res.status(404).json('User not found');
+        } else {
+            // Check for valid password
+            const validPassword = await bcrypt.compare(req.body.password, user.password);
+            if (!validPassword) {
+                res.status(406).json("Incorrect password");
+            } else {
+                // Send back user object
+                res.status(200).json(user);
+            }
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
-        // Check for valid password
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
-        !validPassword && res.status(406).json("Incorrect password");
-
-        // Send back user object
-        res.status(200).json(user);
+// Validate email or username (forgot password)
+router.post('/forgot-password', async (req, res) => {
+    try {
+        let user = {};
+        // Check if user exists
+        // Check if request uses email or username
+        if (req.body.userDetail.includes('@')) {
+            user = await User.findOne({email: req.body.userDetail});
+        } else {
+            user = await User.findOne({username: req.body.userDetail});
+        }
+        
+        if (!user) {
+            res.status(404).json('User not found');
+        } else {
+            res.status(200).json('Reset link sent');
+        }
     } catch (err) {
         res.status(500).json(err);
     }

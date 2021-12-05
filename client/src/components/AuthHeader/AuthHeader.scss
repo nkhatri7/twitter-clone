@@ -1,0 +1,28 @@
+.authheader {
+    position: relative;
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    > .close {
+        height: 1rem;
+        width: 1rem;
+        border: none;
+        background: url('../../assets/images/close-icon.svg') no-repeat center;
+        position: absolute;
+        left: 1.5rem;
+        top: 1.8rem;
+        > .hidden {
+            display: none;
+        }
+    }
+    > .logo {
+        max-width: 2rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .authheader > .close:hover {
+        cursor: pointer;
+    }
+}
