@@ -68,16 +68,18 @@ const SignUp = ({ handleCompletedSignup }) => {
         e.preventDefault();
         axios.post('http://localhost:5000/api/auth/signup/email', { email: email })
             .then(res => {
-                if (res.status === 202) {
-                    emailErrorMessage.current.style.display = 'block';
-                    emailElement.current.style.border = '1px solid red';
-                } else if (res.status === 200) {
+                if (res.status === 200) {
                     emailErrorMessage.current.style.display = 'none';
                     emailElement.current.style.border = '1px solid #303237';
                     setEmailAvailable(true);
                     usernameElement.current.focus();
                 } else {
                     console.log('Unknown error');
+                }
+            }).catch(err => {
+                if (err.response.status === 403) {
+                    emailErrorMessage.current.style.display = 'block';
+                    emailElement.current.style.border = '1px solid red';
                 }
             });
     }
@@ -97,18 +99,21 @@ const SignUp = ({ handleCompletedSignup }) => {
                 password: password,
                 displayName: name
             };
+            
             axios.post('http://localhost:5000/api/auth/signup', user)
                 .then(async res => {
-                    if (res.status === 202) {
-                        usernameErrorMessage.current.style.display = 'block';
-                        usernameElement.current.style.border = '1px solid red';
-                    } else {
+                    if (res.status === 200) {
                         usernameErrorMessage.current.style.display = 'none';
                         usernameElement.current.style.border = '1px solid #303237';
                         
                         const user = await res.data;
                         handleCompletedSignup(user);
                         navigate('/home');
+                    }
+                }).catch(err => {
+                    if (err.response.status === 403) {
+                        usernameErrorMessage.current.style.display = 'block';
+                        usernameElement.current.style.border = '1px solid red';
                     }
                 });
         }

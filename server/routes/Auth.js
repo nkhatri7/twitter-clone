@@ -8,7 +8,7 @@ router.post('/signup', async (req, res) => {
         // Check if username is taken
         const existingUser = await User.findOne({ username: req.body.username });
         if (existingUser) {
-            res.status(202).json('Username already taken');
+            res.status(403).json('Username already taken');
         } else {
             // Generate new password
             const salt = await bcrypt.genSalt(10);
@@ -36,7 +36,7 @@ router.post('/signup/email', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (user) {
-            res.status(202).json('Email has already been taken.');
+            res.status(403).json('Email has already been taken.');
         } else {
             res.status(200).json('Email is available');
         }
@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 
         // Check for valid password
         const validPassword = await bcrypt.compare(req.body.password, user.password);
-        !validPassword && res.status(400).json("Incorrect password");
+        !validPassword && res.status(406).json("Incorrect password");
 
         // Send back user object
         res.status(200).json(user);
