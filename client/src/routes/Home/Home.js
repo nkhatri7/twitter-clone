@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import './Home.scss';
+import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 
 const Home = ({ activeUser }) => {
 
@@ -7,8 +9,10 @@ const Home = ({ activeUser }) => {
     }, [activeUser]);
 
     return (
-        <div>
-            
+        <div className="home">
+            <div className="home-wrapper">
+                <MobileFooterMenu page="home" />
+            </div>
         </div>
     );
 }

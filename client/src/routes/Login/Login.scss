@@ -95,7 +95,7 @@
     form > input[type=submit]:hover {
         cursor: pointer;
         &:disabled {
-            cursor: not-allowed;
+            cursor: auto;
         }
     }
     .login-wrapper .forgot-password-btn {

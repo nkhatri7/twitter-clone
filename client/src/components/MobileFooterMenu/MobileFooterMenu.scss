@@ -1,0 +1,29 @@
+.mobile-footer-menu {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #303336;
+    > nav {
+        width: 100%;
+        > ul {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 2rem 1.5rem 2rem;
+            > li {
+                width: 2rem;
+                > .mobile-footer-link {
+                    position: relative;
+                    svg {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 1.8rem;
+                    }
+                }
+            }
+        }
+    }
+}
