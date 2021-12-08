@@ -1,9 +1,11 @@
+@use '../../global' as g;
+
 .mobile-footer-menu {
     width: 100vw;
     position: fixed;
     bottom: 0;
     left: 0;
-    border-top: 1px solid #303336;
+    border-top: 1px solid g.$border-colour;
     > nav {
         width: 100%;
         > ul {
@@ -11,9 +13,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.6rem 2rem 1.5rem 2rem;
+            padding: 0.6rem 2rem 2.6rem 2rem;
             > li {
                 width: 2rem;
+                list-style: none;
                 > .mobile-footer-link {
                     position: relative;
                     svg {

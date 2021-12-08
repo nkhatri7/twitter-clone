@@ -26,9 +26,9 @@ const App = () => {
         <Route path="/login" element={<Login handleSetActiveUser={handleSetActiveUser} />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/home" element={<Home activeUser={activeUser} />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/notifications" element={<Notifications />} />
-        <Route path="/messages" element={<Messages />} />
+        <Route path="/explore" element={<Explore activeUser={activeUser} />} />
+        <Route path="/notifications" element={<Notifications activeUser={activeUser} />} />
+        <Route path="/messages" element={<Messages activeUser={activeUser} />} />
       </Routes>
     </Router>
   );

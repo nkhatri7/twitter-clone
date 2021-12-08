@@ -1,0 +1,111 @@
+@use '../../global' as g;
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.mobile-menu {
+    background-color: #000000;
+    position: fixed;
+    z-index: 3;
+    inset: 0 25% 0 0;
+    > .menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.1rem 1.8rem 1.1rem 1rem;
+        border-bottom: 1px solid g.$border-colour;
+        > .account-info {
+            color: #FFFFFF;
+            font-weight: 800;
+        }
+        > .close-menu {
+            background: url('../../assets/images/close-icon.svg') no-repeat center;
+            background-size: 0.8rem;
+            height: 0.8rem;
+            width: 0.8rem;
+            border: none;
+            > .hidden {
+                display: none;
+            }
+        }
+    }
+    > .mobile-menu-main {
+        @include flex-column();
+        border-bottom: 1px solid g.$border-colour;
+        padding: 1rem 1.1rem 1.3rem 1.1rem;
+        > .account-details {
+            @include flex-column();
+            margin-bottom: 1.2rem;
+            > .mobile-menu-profile-link {
+                @include flex-column();
+                > .mobile-menu-profile-pic {
+                    border-radius: 50%;
+                    height: 2.5rem;
+                    width: 2.5rem;
+                }
+                > .menu-display-name {
+                    color: #FFFFFF;
+                    margin-top: 1rem;
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                }
+                > .menu-username {
+                    color: g.$secondary-text-colour;
+                    margin-top: 0.2rem;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                }
+            }
+            > .mobile-menu-network-container {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-top: 1.5rem;
+                > .mobile-menu-network-detail {
+                    color: #FFFFFF;
+                    font-weight: 800;
+                    font-size: 0.9rem;
+                    &:first-child {
+                        margin-right: 1.2rem;
+                    }
+                    > span {
+                        color: g.$secondary-text-colour;
+                        font-weight: 500;
+                        margin-left: 0.3rem;
+                    }
+                }
+            }
+        }
+    }
+    > .mobile-menu-footer {
+        padding: 1.1rem 1rem;
+    }
+    .mobile-menu-links-container {
+        .mobile-menu-link-container {
+            list-style: none;
+            &:not(:first-child) {
+                margin-top: 1.8rem;
+            }
+            > .mobile-menu-link {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                text-decoration: none;
+                > svg {
+                    width: 1.2rem;
+                    margin-right: 0.8rem;
+                }
+                > span {
+                    margin-top: 0.1rem;
+                    color: #FFF;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

@@ -83,13 +83,13 @@ const Login = ({ handleSetActiveUser }) => {
                     <h1>Sign in to Twitter</h1>
                     <form onSubmit={handleLogin}>
                         <input type="text" name="userLoginDetail" placeholder="Username or email" 
-                            value={userLoginDetail} onChange={handleUserLoginDetailChange} tabIndex={0}
+                            value={userLoginDetail} onChange={handleUserLoginDetailChange}
                             ref={userLoginDetailElement} />
                         <span className="error-message" ref={userLoginDetailErrorMessage}>Invalid username or email.</span>
                         <input type="password" name="password" placeholder="Password" value={password}
-                            onChange={handlePasswordChange} tabIndex={1} ref={passwordElement} />
+                            onChange={handlePasswordChange} ref={passwordElement} />
                         <span className="error-message" ref={passwordErrorMessage}>Incorrect password.</span>
-                        <input type="submit" value="Sign In" disabled={disabled} tabIndex={3} />
+                        <input type="submit" value="Sign In" disabled={disabled} />
                     </form>
                     <button className="forgot-password-btn" onClick={handleForgotPassword}>Forgot Password?</button>
                     <div className="no-account">
