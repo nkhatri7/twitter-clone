@@ -5,7 +5,7 @@ import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu
 import MobileHeader from '../../components/MobileHeader/MobileHeader';
 import Tweet from '../../components/Tweet/Tweet';
 
-const Home = ({ activeUser }) => {
+const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet }) => {
 
     const [tweets, setTweets] = useState([]);
     const [users, setUsers] = useState([]);
@@ -39,6 +39,10 @@ const Home = ({ activeUser }) => {
                 tweet={tweet}
                 user={user ? user : {}}
                 activeUser={activeUser}
+                handleLike={handleLike}
+                handleUnlike={handleUnlike}
+                handleRetweet={handleRetweet}
+                handleRemoveRetweet={handleRemoveRetweet}
             />
         );
     });
