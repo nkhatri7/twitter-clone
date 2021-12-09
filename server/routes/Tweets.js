@@ -57,20 +57,24 @@ router.get('/:id', async (req, res) => {
 // Get timeline tweets
 router.get('/timeline/all', async (req, res) => {
     try {
-        const currentUser = await User.findById(req.body.userId);
-        const userTweets = await Tweet.find({
-            userId: currentUser._id
+        // const currentUser = await User.findById(req.body.userId);
+        // const userTweets = await Tweet.find({
+        //     userId: currentUser._id
+        // });
+        // const otherTweets = await Promise.all(
+        //     currentUser.following.map(otherUserId => {
+        //         return Tweet.find({
+        //             userId: otherUserId
+        //         });
+        //     })
+        // );
+        // res.status(200).json([...userTweets, ...otherTweets]);
+        const tweets = await Tweet.find({
+            reply: false
         });
-        const otherTweets = await Promise.all(
-            currentUser.following.map(otherUserId => {
-                return Tweet.find({
-                    userId: otherUserId
-                });
-            })
-        );
-        res.status(200).json([...userTweets, ...otherTweets]);
+        res.status(200).json(tweets);
     } catch (err) {
-        res.json(500).json(err);
+        res.status(500).json(err);
     }
 });
 

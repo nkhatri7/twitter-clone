@@ -1,0 +1,8 @@
+.home-wrapper {
+    width: 100vw;
+    > .tweets-container {
+        width: 100%;
+        margin-top: 55.39px;
+        overflow-y: scroll;
+    }
+}

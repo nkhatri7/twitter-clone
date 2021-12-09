@@ -1,0 +1,87 @@
+@use '../../global' as g;
+
+.tweet {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid g.$border-colour;
+    > .tweet-profile-pic {
+        max-width: 2.5rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+    > .main-tweet-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        > .tweet-header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0.2rem;
+            > .tweet-user-name {
+                color: #FFFFFF;
+                margin-right: 0.5rem;
+                font-weight: 700;
+            }
+            > .tweet-user-username {
+                color: g.$secondary-text-colour;
+                font-size: 0.9rem;
+            }
+            > .separator {
+                height: 2px;
+                width: 2px;
+                border-radius: 50%;
+                margin: 0 0.5rem;
+                background-color: g.$secondary-text-colour;
+            }
+            > .tweet-time {
+                color: g.$secondary-text-colour;
+                font-size: 0.9rem;
+            }
+        }
+        .tweet-main {
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.7rem;
+        }
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            > .tweet-action {
+                color: g.$secondary-text-colour;
+                padding-left: 2rem;
+                border: none;
+                font-size: 0.9rem;
+                background-position: 0% 50%;
+                background-size: 0.8rem;
+            }
+            .reply-button {
+                background: url('../../assets/images/reply.svg') no-repeat;
+            }
+            .retweet-button {
+                background: url('../../assets/images/retweet.svg') no-repeat;
+            }
+            .like-button {
+                background: url('../../assets/images/like.svg') no-repeat;
+            }
+            .share-button {
+                background: url('../../assets/images/share.svg') no-repeat center;
+                background-size: 0.9rem;
+                border: none;
+                height: 0.9rem;
+                width: 0.9rem;
+                > .hidden {
+                    display: none;
+                }
+            }
+        }
+    }
+}
