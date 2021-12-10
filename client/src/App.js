@@ -10,6 +10,7 @@ import Login from './routes/Login/Login';
 import Messages from './routes/Messages/Messages';
 import Notifications from './routes/Notifications/Notifications';
 import SignUp from './routes/SignUp/SignUp';
+import NewTweet from './routes/NewTweet/NewTweet';
 
 const App = () => {
 
@@ -19,28 +20,38 @@ const App = () => {
     setActiveUser(user);
   }
 
-  const handleLike = (tweetId) => {
-    axios.put(`http://localhost:5000/api/tweets/${tweetId}/like`, { userId: activeUser._id })
+  const handleNewTweet = (tweetText) => {
+    const tweet = {
+      userId: activeUser._id,
+      text: tweetText,
+      reply: false
+    };
+
+    axios.post('http://localhost:5000/api/tweets/new', tweet)
       .then(res => setActiveUser(res.data.user))
       .catch(err => console.log(err));
+  }
+
+  const handleTweetEvent = (tweetId, action) => {
+    axios.put(`http://localhost:5000/api/tweets/${tweetId}/${action}`, { userId: activeUser._id })
+      .then(res => setActiveUser(res.data.user))
+      .catch(err => console.log(err));
+  }
+
+  const handleLike = (tweetId) => {
+    handleTweetEvent(tweetId, 'like');
   }
 
   const handleUnlike = (tweetId) => {
-    axios.put(`http://localhost:5000/api/tweets/${tweetId}/unlike`, { userId: activeUser._id })
-      .then(res => setActiveUser(res.data.user))
-      .catch(err => console.log(err));
+    handleTweetEvent(tweetId, 'unlike');
   }
 
   const handleRetweet = (tweetId) => {
-    axios.put(`http://localhost:5000/api/tweets/${tweetId}/retweet`, { userId: activeUser._id })
-      .then(res => setActiveUser(res.data.user))
-      .catch(err => console.log(err));
+    handleTweetEvent(tweetId, 'retweet');
   }
 
   const handleRemoveRetweet = (tweetId) => {
-    axios.put(`http://localhost:5000/api/tweets/${tweetId}/retweet/remove`, { userId: activeUser._id })
-      .then(res => setActiveUser(res.data.user))
-      .catch(err => console.log(err));
+    handleTweetEvent(tweetId, 'retweet/remove');
   }
 
   return (
@@ -62,6 +73,7 @@ const App = () => {
             />
           } 
         />
+        <Route path="/compose/tweet" element={<NewTweet handleNewTweet={handleNewTweet} />} />
         <Route path="/explore" element={<Explore activeUser={activeUser} />} />
         <Route path="/notifications" element={<Notifications activeUser={activeUser} />} />
         <Route path="/messages" element={<Messages activeUser={activeUser} />} />

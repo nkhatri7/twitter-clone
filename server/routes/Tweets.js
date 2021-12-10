@@ -3,7 +3,7 @@ const Tweet = require('../models/TweetModel');
 const User = require('../models/UserModel');
 
 // New tweet
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
     try {
         const newTweet = new Tweet(req.body);
         const savedTweet = await newTweet.save();

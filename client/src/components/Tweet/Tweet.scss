@@ -18,31 +18,55 @@
         justify-content: flex-start;
         align-items: flex-start;
         width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
         > .tweet-header {
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             width: 100%;
             margin-bottom: 0.2rem;
-            > .tweet-user-name {
-                color: #FFFFFF;
-                margin-right: 0.5rem;
-                font-weight: 700;
+            > .tweet-header-main {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                max-width: 87%;
+                > .tweet-user-name {
+                    color: #FFFFFF;
+                    margin-right: 0.5rem;
+                    font-weight: 700;
+                    min-width: max-content;
+                }
+                > .tweet-user-username {
+                    color: g.$secondary-text-colour;
+                    font-size: 0.9rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                > .separator {
+                    height: 2px;
+                    width: 2px;
+                    border-radius: 50%;
+                    margin: 0 0.5rem;
+                    background-color: g.$secondary-text-colour;
+                }
+                > .tweet-time {
+                    color: g.$secondary-text-colour;
+                    font-size: 0.9rem;
+                    min-width: max-content;
+                }
             }
-            > .tweet-user-username {
-                color: g.$secondary-text-colour;
-                font-size: 0.9rem;
-            }
-            > .separator {
-                height: 2px;
-                width: 2px;
-                border-radius: 50%;
-                margin: 0 0.5rem;
-                background-color: g.$secondary-text-colour;
-            }
-            > .tweet-time {
-                color: g.$secondary-text-colour;
-                font-size: 0.9rem;
+            .options {
+                background: url('../../assets/images/options-dots.svg') no-repeat center;
+                background-size: 0.9rem;
+                border: none;
+                height: 0.9rem;
+                width: 0.9rem;
+                min-width: 0.9rem;
+                > .hidden {
+                    display: none;
+                }
             }
         }
         .tweet-main {

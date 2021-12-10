@@ -1,0 +1,77 @@
+@use '../../global' as g;
+
+.new-tweet-container {
+    > header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid g.$border-colour;
+        > .back-btn {
+            background: url('../../assets/images/left-arrow.svg') no-repeat center;
+            background-size: 1rem;
+            height: 1rem;
+            width: 1.5rem;
+            border: none;
+            > .hidden {
+                display: none;
+            }
+        }
+        > .tweet-btn {
+            background-color: g.$primary-blue;
+            padding: 0.45rem 1.05rem;
+            color: white;
+            font-weight: 800;
+            border: none;
+            border-radius: 50px;
+            &:disabled {
+                opacity: 0.5;
+            }
+        }
+    }
+    .new-tweet-main-container {
+        padding: 0.5rem 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        > .new-tweet-profile-pic {
+            max-width: 3rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        > .tweet-input-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 81%;
+            > .tweet-input {
+                background-color: #000000;
+                color: #FFFFFF;
+                border: none;
+                padding: 1rem 0 0.5rem 0.3rem;
+                font-size: 1.2rem;
+                font-weight: 500;
+                border-bottom: 1px solid g.$border-colour;
+                min-height: 10rem;
+                height: auto;
+                resize: none;
+                width: 100%;
+                margin-bottom: 0.5rem;
+                overflow: hidden;
+                &::placeholder {
+                    color: g.$secondary-text-colour;
+                }
+                &:focus {
+                    outline: none !important;
+                }
+            }
+            > .limit-warning {
+                color: #E5397F;
+                font-size: 0.9rem;
+                display: none;
+            }
+        }
+    }
+}

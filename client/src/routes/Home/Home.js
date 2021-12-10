@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 import './Home.scss';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import MobileHeader from '../../components/MobileHeader/MobileHeader';
@@ -9,6 +10,8 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
 
     const [tweets, setTweets] = useState([]);
     const [users, setUsers] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/tweets/timeline/all', { userId: activeUser._id })
@@ -30,7 +33,15 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
         });
     }, [tweets]);
 
-    const tweetsDisplay = tweets.map(tweet => {
+    const handleNewTweetNavigation = () => {
+        navigate('/compose/tweet');
+    }
+
+    const sortedTweets = tweets.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    const tweetsDisplay = sortedTweets.map(tweet => {
         const user = users.find(user => user._id === tweet.userId);
 
         return (
@@ -51,9 +62,15 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
         <div className="home">
             <div className="home-wrapper">
                 <MobileHeader page="Home" activeUser={activeUser} />
-                <div className="tweets-container">
+                <main className="tweets-container">
                     {tweets.length > 0 ? tweetsDisplay : null}
-                </div>
+                    <div className="no-more-tweets">No more tweets</div>
+                </main>
+                <button 
+                    className="new-tweet-btn" 
+                    aria-label="New tweet" 
+                    onClick={handleNewTweetNavigation}
+                >+</button>
                 <MobileFooterMenu page="home" />
             </div>
         </div>
