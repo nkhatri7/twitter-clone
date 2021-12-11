@@ -5,11 +5,15 @@ import './Home.scss';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import MobileHeader from '../../components/MobileHeader/MobileHeader';
 import Tweet from '../../components/Tweet/Tweet';
+import TweetOptions from '../../components/TweetOptions/TweetOptions';
+import Overlay from '../../components/Overlay/Overlay';
 
-const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet }) => {
+const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet, handleDeleteTweet }) => {
 
     const [tweets, setTweets] = useState([]);
     const [users, setUsers] = useState([]);
+    const [optionsDisplay, setOptionsDisplay] = useState(false);
+    const [tweetOptions, setTweetOptions] = useState(null);
 
     const navigate = useNavigate();
 
@@ -37,6 +41,15 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
         navigate('/compose/tweet');
     }
 
+    const handleTweetOptionsEvent = (tweet) => {
+        setTweetOptions(tweet);
+        handleOptionsView();
+    }
+
+    const handleOptionsView = () => {
+        setOptionsDisplay(display => !display);
+    } 
+
     const sortedTweets = tweets.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
     });
@@ -54,6 +67,7 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
                 handleUnlike={handleUnlike}
                 handleRetweet={handleRetweet}
                 handleRemoveRetweet={handleRemoveRetweet}
+                handleTweetOptions={handleTweetOptionsEvent}
             />
         );
     });
@@ -63,14 +77,20 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
             <div className="home-wrapper">
                 <MobileHeader page="Home" activeUser={activeUser} />
                 <main className="tweets-container">
-                    {tweets.length > 0 ? tweetsDisplay : null}
-                    <div className="no-more-tweets">No more tweets</div>
+                    <div className="tweets-container">
+                        {tweets.length > 0 ? tweetsDisplay : null}
+                        <div className="no-more-tweets">No more tweets</div>
+                    </div>
+                    <button className="new-tweet-btn" aria-label="New tweet" onClick={handleNewTweetNavigation}>+</button>
+                    {optionsDisplay === false ? null :
+                        <TweetOptions 
+                            handleOptionsView={handleOptionsView} 
+                            tweet={tweetOptions} 
+                            handleDeleteTweet={handleDeleteTweet}
+                            />
+                    }
+                    {optionsDisplay ? <Overlay /> : null}
                 </main>
-                <button 
-                    className="new-tweet-btn" 
-                    aria-label="New tweet" 
-                    onClick={handleNewTweetNavigation}
-                >+</button>
                 <MobileFooterMenu page="home" />
             </div>
         </div>

@@ -11,10 +11,10 @@ const Login = ({ handleSetActiveUser }) => {
     const [password, setPassword] = useState('');
     const [disabled, setDisabled] = useState(true);
 
-    const userLoginDetailElement = useRef();
-    const userLoginDetailErrorMessage = useRef();
-    const passwordElement = useRef();
-    const passwordErrorMessage = useRef();
+    const userLoginDetailElement = useRef(null);
+    const userLoginDetailErrorMessage = useRef(null);
+    const passwordElement = useRef(null);
+    const passwordErrorMessage = useRef(null);
 
     const navigate = useNavigate();
 

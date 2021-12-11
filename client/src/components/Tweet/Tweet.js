@@ -4,8 +4,8 @@ import profilePic from '../../assets/images/default-profile-pic.png';
 
 const Tweet = (props) => {
 
-    const likeButton = useRef();
-    const retweetButton = useRef();
+    const likeButton = useRef(null);
+    const retweetButton = useRef(null);
 
     const checkLiked = () => {
         const userLikes = props.activeUser.likes;
@@ -84,7 +84,7 @@ const Tweet = (props) => {
                     <div className="options-container">
                         {
                             props.activeUser._id !== props.tweet.userId ? null :
-                                <button className="options">
+                                <button className="options" onClick={() => props.handleTweetOptions(props.tweet)}>
                                     <span className="hidden">Options</span>
                                 </button>
                         }

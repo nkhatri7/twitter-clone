@@ -54,6 +54,15 @@ const App = () => {
     handleTweetEvent(tweetId, 'retweet/remove');
   }
 
+  const handleDeleteTweet = (tweetId) => {
+    axios.delete(`http://localhost:5000/api/tweets/${tweetId}`, { userId: activeUser._id })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    axios.get(`http://localhost:5000/api/users/active/${activeUser._id}`)
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
   return (
     <Router>
       <Routes>
@@ -70,6 +79,7 @@ const App = () => {
               handleUnlike={handleUnlike}
               handleRetweet={handleRetweet}
               handleRemoveRetweet={handleRemoveRetweet}
+              handleDeleteTweet={handleDeleteTweet}
             />
           } 
         />

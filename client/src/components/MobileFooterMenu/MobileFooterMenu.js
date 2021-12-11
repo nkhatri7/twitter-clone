@@ -4,14 +4,14 @@ import './MobileFooterMenu.scss';
 
 const MobileFooterMenu = ({ page }) => {
 
-    const homeInactive = useRef();
-    const homeActive = useRef();
-    const exploreInactive = useRef();
-    const exploreActive = useRef();
-    const notificationsInactive = useRef();
-    const notificationsActive = useRef();
-    const messagesInactive = useRef();
-    const messagesActive = useRef();
+    const homeInactive = useRef(null);
+    const homeActive = useRef(null);
+    const exploreInactive = useRef(null);
+    const exploreActive = useRef(null);
+    const notificationsInactive = useRef(null);
+    const notificationsActive = useRef(null);
+    const messagesInactive = useRef(null);
+    const messagesActive = useRef(null);
 
     const inactiveIcons = [homeInactive, exploreInactive, notificationsInactive, messagesInactive];
     const activeIcons = [homeActive, exploreActive, notificationsActive, messagesActive];

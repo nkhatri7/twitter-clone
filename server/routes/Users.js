@@ -15,6 +15,16 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// Get active user
+router.get('/active/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 // Update user
 router.put('/:id', async (req, res) => {
     // Re-encrypt password

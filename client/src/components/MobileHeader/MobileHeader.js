@@ -5,8 +5,8 @@ import './MobileHeader.scss';
 const MobileHeader = ({ page, activeUser }) => {
 
     const [menuOpen, setMenuOpen] = useState(false);
-    const menuContainer = useRef();
-    const overlay = useRef();
+    const menuContainer = useRef(null);
+    const overlay = useRef(null);
 
     const handleMobileMenuToggle = () => {
         setMenuOpen(menuOpen => !menuOpen);

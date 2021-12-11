@@ -15,12 +15,12 @@ const SignUp = ({ handleSetActiveUser }) => {
     const [nextDisabled, setNextDisabled] = useState(true);
     const [signupDisabled, setSignupDisabled] = useState(true);
 
-    const emailElement = useRef();
-    const emailErrorMessage = useRef();
-    const usernameElement = useRef();
-    const usernameErrorMessage = useRef();
-    const confirmedPasswordElement = useRef();
-    const confirmedPasswordErrorMessage = useRef();
+    const emailElement = useRef(null);
+    const emailErrorMessage = useRef(null);
+    const usernameElement = useRef(null);
+    const usernameErrorMessage = useRef(null);
+    const confirmedPasswordElement = useRef(null);
+    const confirmedPasswordErrorMessage = useRef(null);
 
     const navigate = useNavigate();
 

@@ -8,7 +8,7 @@ const NewTweet = ({ handleNewTweet }) => {
     const [tweetText, setTweetText] = useState('');
     const [disabled, setDisabled] = useState(true);
 
-    const limitWarning = useRef();
+    const limitWarning = useRef(null);
     
     const navigate = useNavigate();
 
