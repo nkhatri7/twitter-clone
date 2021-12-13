@@ -9,7 +9,16 @@ import Overlay from '../../components/Overlay/Overlay';
 import TweetFooter from '../../components/TweetFooter/TweetFooter';
 import Tweet from '../../components/Tweet/Tweet';
 
-const DetailedTweet = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet, handleDeleteTweet }) => {
+const DetailedTweet = ({ 
+    activeUser, 
+    handleLike, 
+    handleUnlike, 
+    handleRetweet, 
+    handleRemoveRetweet,
+    handleReply,
+    handleDeleteReply,
+    handleDeleteTweet
+}) => {
 
     const { tweetId } = useParams();
     const [tweet, setTweet] = useState(null);
@@ -103,6 +112,14 @@ const DetailedTweet = ({ activeUser, handleLike, handleUnlike, handleRetweet, ha
         }
     }
 
+    const handleReplyEvent = () => {
+        if (replyText.trim()) {
+            handleReply(tweetId, replyText);
+            setReplyText('');
+            setReplyBtnDisplay(false);
+        }
+    }
+
     const repliesDisplay = replies.map(reply => {
         const replyUser = replyUsers.find(user => user._id === reply.userId);
 
@@ -175,7 +192,7 @@ const DetailedTweet = ({ activeUser, handleLike, handleUnlike, handleRetweet, ha
                             onFocus={() => setReplyBtnDisplay(true)}
                         />
                         {replyBtnDisplay ? 
-                            <button className="reply-btn" disabled={disabled}>Reply</button> 
+                            <button className="reply-btn" disabled={disabled} onClick={handleReplyEvent}>Reply</button> 
                         : null}
                     </div>
                 </div>
@@ -185,6 +202,7 @@ const DetailedTweet = ({ activeUser, handleLike, handleUnlike, handleRetweet, ha
                         handleOptionsView={handleOptionsView} 
                         tweet={tweetOptions} 
                         handleDeleteTweet={handleDeleteTweet}
+                        handleDeleteReply={handleDeleteReply}
                     />
                 }
                 {optionsDisplay ? <Overlay /> : null}

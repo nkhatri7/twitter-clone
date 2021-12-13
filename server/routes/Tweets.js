@@ -37,23 +37,35 @@ router.delete('/:id', async (req, res) => {
         const user = await User.findByIdAndUpdate(req.body.userId, {
             $pull: { tweets: req.params.id }
         }, { new: true });
-        const tweet = findById(req.params.id);
 
-        // Removing likes and retweets from other users that interacted with tweet
+        const tweet = await Tweet.findById(req.params.id);
+
+        // Removing replies, likes and retweets from other users that interacted with tweet
+        if (tweet.replies.length > 0) {
+            tweet.replies.forEach(async replyId => {
+                const reply = await Tweet.findById(replyId);
+                await User.findByIdAndUpdate(reply.userId, {
+                    $pull: { tweets: replyId }
+                });
+                await Tweet.findByIdAndDelete(replyId);
+            });
+        }
+
         if (tweet.likes.length > 0) {
             tweet.likes.forEach(async userId => {
-                const user = await User.findByIdAndUpdate(userId, {
+                await User.findByIdAndUpdate(userId, {
                     $pull: { likes: req.params.id }
                 });
             });
         }
         if (tweet.retweets.length > 0) {
             tweet.retweets.forEach(async userId => {
-                const user = await User.findByIdAndUpdate(userId, {
+                await User.findByIdAndUpdate(userId, {
                     $pull: { retweets: req.params.id }
                 });
             });
         }
+
         await Tweet.findByIdAndDelete(req.params.id);
         res.status(200).json(user);
     } catch (err) {

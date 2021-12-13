@@ -87,7 +87,7 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
                             handleOptionsView={handleOptionsView} 
                             tweet={tweetOptions} 
                             handleDeleteTweet={handleDeleteTweet}
-                            />
+                        />
                     }
                     {optionsDisplay ? <Overlay /> : null}
                 </main>

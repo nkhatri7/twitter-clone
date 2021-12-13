@@ -55,9 +55,30 @@ const App = () => {
     handleTweetEvent(tweetId, 'retweet/remove');
   }
 
+  const handleReply = (tweetId, tweetText) => {
+    const tweet = {
+      userId: activeUser._id,
+      text: tweetText,
+      reply: true,
+      replyTo: tweetId
+    }
+
+    axios.post(`http://localhost:5000/api/tweets/${tweetId}/reply`, tweet)
+      .then(res => setActiveUser(res.data.user))
+      .catch(err => console.log(err));
+  }
+
+  const handleDeleteReply = (tweetId, replyId) => {
+    axios.delete(`http://localhost:5000/api/tweets/${tweetId}/delete/${replyId}`)
+      .catch(err => console.log(err));
+
+    axios.get(`http://localhost:5000/api/users/active/${activeUser._id}`)
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
   const handleDeleteTweet = (tweetId) => {
     axios.delete(`http://localhost:5000/api/tweets/${tweetId}`, { userId: activeUser._id })
-      .then(res => console.log(res))
       .catch(err => console.log(err));
     axios.get(`http://localhost:5000/api/users/active/${activeUser._id}`)
       .then(res => setActiveUser(res.data))
@@ -93,6 +114,8 @@ const App = () => {
               handleUnlike={handleUnlike}
               handleRetweet={handleRetweet}
               handleRemoveRetweet={handleRemoveRetweet}
+              handleReply={handleReply}
+              handleDeleteReply={handleDeleteReply}
               handleDeleteTweet={handleDeleteTweet}
             />
           }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TweetOptions.scss';
 
-const TweetOptions = ({ handleOptionsView, tweet, handleDeleteTweet }) => {
+const TweetOptions = ({ handleOptionsView, tweet, handleDeleteTweet, handleDeleteReply }) => {
 
     const [confirmationModalDisplay, setConfirmationModalDisplay] = useState(false);
 
@@ -10,7 +10,11 @@ const TweetOptions = ({ handleOptionsView, tweet, handleDeleteTweet }) => {
     }
 
     const handleDeleteTweetEvent = () => {
-        handleDeleteTweet(tweet._id);
+        if (tweet.reply) {
+            handleDeleteReply(tweet.replyTo, tweet._id);
+        } else {
+            handleDeleteTweet(tweet._id);
+        }
         handleConfirmationDisplayToggle();
         handleOptionsView();
     }

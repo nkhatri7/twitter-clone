@@ -57,9 +57,9 @@ const Tweet = ({
         <div className="tweet">
             <img className="tweet-profile-pic" src={profilePic} alt="" />
             <div className="main-tweet-content">
-                <div className="tweet-header" onClick={() => navigate(`/${user.username}/status/${tweet._id}`)}>
+                <div className="tweet-header">
                     <div className="tweet-header-main-container">
-                        <div className="tweet-header-main">
+                        <div className="tweet-header-main" onClick={() => navigate(`/${user.username}/status/${tweet._id}`)}>
                             <span className="tweet-user-name">{user ? user.displayName : ''}</span>
                             <span className="tweet-user-username">{user ? `@${user.username}` : ''}</span>
                             <div className="separator"></div>

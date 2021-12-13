@@ -38,7 +38,7 @@ const NewTweet = ({ handleNewTweet }) => {
     }
 
     const handleNewTweetEvent = () => {
-        if (tweetText.trim() !== '') {
+        if (tweetText.trim()) {
             handleNewTweet(tweetText);
             navigate('/home');
         }
