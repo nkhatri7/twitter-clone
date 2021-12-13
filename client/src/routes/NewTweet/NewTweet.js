@@ -27,11 +27,8 @@ const NewTweet = ({ handleNewTweet }) => {
     }, [tweetText]);
 
     const handleTweetInputChange = e => {
-        if (e.target.style.height !== `${e.target.scrollHeight + 1}px` && e.target.scrollHeight !== 159) {
-            e.target.style.height = `${e.target.scrollHeight}px`;
-        } else {
-            e.target.style.height = `${e.target.scrollHeight}px`;
-        }
+        e.target.style.height = 'auto';
+        e.target.style.height = `${e.target.scrollHeight}px`;
 
         setTweetText(e.target.value);
     }

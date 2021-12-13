@@ -1,0 +1,44 @@
+@use '../../global' as g;
+
+.tweet-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.8rem 0 0 0;
+    > .tweet-action {
+        color: g.$secondary-text-colour;
+        padding-left: 2rem;
+        border: none;
+        font-size: 0.9rem;
+        background-position: 0% 50%;
+        background-size: 0.8rem;
+    }
+    .reply-button {
+        background: url('../../assets/images/reply.svg') no-repeat;
+    }
+    .retweet-button {
+        background: url('../../assets/images/retweet.svg') no-repeat;
+    }
+    .retweeted {
+        background: url('../../assets/images/retweeted.svg') no-repeat;
+        color: #53B681;
+    }
+    .like-button {
+        background: url('../../assets/images/like.svg') no-repeat;
+    }
+    .liked {
+        background: url('../../assets/images/liked.svg') no-repeat;
+        color: #E5397F;
+    }
+    .share-button {
+        background: url('../../assets/images/share.svg') no-repeat center;
+        background-size: 0.9rem;
+        border: none;
+        height: 0.9rem;
+        width: 0.9rem;
+        > .hidden {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,152 @@
+@use '../../global' as g;
+
+.detailed-tweet {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    > header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid g.$border-colour;
+        width: 100%;
+        > .back {
+            background: url('../../assets/images/left-arrow.svg') no-repeat center;
+            background-size: 1rem;
+            height: 1rem;
+            width: 1.2rem;
+            border: none;
+            margin-right: 2.3rem;
+            > .hidden {
+                display: none;
+            }
+        }
+        > h1 {
+            font-size: 1rem;
+            color: #FFFFFF;
+        }
+    }
+    > main {
+        width: 100%;
+        > .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 1rem;
+            > .tweet-header-main {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                > .profile-pic {
+                    max-width: 2.8rem;
+                    border-radius: 50%;
+                }
+                > .user-details {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-start;
+                    margin-left: 0.8rem;
+                    > .name {
+                        color: #FFFFFF;
+                        font-size: 0.9rem;
+                        font-weight: 700;
+                        min-width: max-content;
+                    }
+                    > .username {
+                        color: g.$secondary-text-colour;
+                        font-size: 0.9rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+            .options {
+                background: url('../../assets/images/options-dots.svg') no-repeat center;
+                background-size: 1rem;
+                border: none;
+                height: 1rem;
+                width: 1rem;
+                min-width: 1rem;
+                > .hidden {
+                    display: none;
+                }
+            }
+        }
+        > .tweet-main {
+            padding: 0 1rem;
+            color: #FFFFFF;
+            width: 100%;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        > .tweet-datetime-details {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1rem 1rem;
+            color: g.$secondary-text-colour;
+            font-size: 0.9rem;
+            > .separator {
+                height: 2px;
+                width: 2px;
+                border-radius: 50%;
+                margin: 0 0.5rem;
+                background-color: g.$secondary-text-colour;
+            }
+        }
+        > .tweet-footer-container {
+            padding: 0.2rem 1.5rem 1rem 1.5rem;
+            width: 100%;
+            border-top: 1px solid g.$border-colour;
+            border-bottom: 1px solid g.$border-colour;
+        }
+        > .reply-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 1rem 1rem 0.6rem 1rem;
+            width: 100%;
+            border-bottom: 1px solid g.$border-colour;
+            > .active-user-profile-pic {
+                max-width: 2.8rem;
+                border-radius: 50%;
+            }
+            > .reply-actions-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-end;
+                width: 100%;
+                > .reply-input {
+                    background-color: transparent;
+                    color: #FFFFFF;
+                    font-size: 1.1rem;
+                    border: none;
+                    padding: 0.8rem 0.5rem 0.5rem 1rem;
+                    width: 100%;
+                    resize: none;
+                    &:focus {
+                        outline: none !important;
+                    }
+                }
+                > .reply-btn {
+                    background-color: g.$primary-blue;
+                    color: #FFFFFF;
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                    padding: 0.5rem 1rem;
+                    border: none;
+                    border-radius: 50px;
+                    &:disabled {
+                        opacity: 0.5;
+                    }
+                }
+            }
+        }
+    }
+}
