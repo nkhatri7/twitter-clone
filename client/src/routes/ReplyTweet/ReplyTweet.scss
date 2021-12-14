@@ -1,0 +1,90 @@
+@use '../../global' as g;
+
+.reply-tweet {
+    > .reply-tweet-main {
+        position: relative;
+        > .tweet {
+            border-bottom: none;
+            > .main-tweet-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                > .tweet-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    margin-bottom: 0.2rem;
+                    > .tweet-header-main-container {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        max-width: 87%;
+                        .tweet-header-main {
+                            width: 100%;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            > .tweet-user-name {
+                                color: #FFFFFF;
+                                margin-right: 0.5rem;
+                                font-weight: 700;
+                                min-width: max-content;
+                            }
+                            > .tweet-user-username {
+                                color: g.$secondary-text-colour;
+                                font-size: 0.9rem;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+                            > .separator {
+                                height: 2px;
+                                width: 2px;
+                                border-radius: 50%;
+                                margin: 0 0.5rem;
+                                background-color: g.$secondary-text-colour;
+                            }
+                            > .tweet-time {
+                                color: g.$secondary-text-colour;
+                                font-size: 0.9rem;
+                                min-width: max-content;
+                            }
+                        }
+                    }
+                }
+                > .tweet-main {
+                    color: #FFFFFF;
+                    width: 100%;
+                }
+                > .reply-info {
+                    padding-top: 0.5rem;
+                    > p {
+                        color: g.$secondary-text-colour;
+                        font-size: 0.9rem;
+                        padding: 0.2rem 0;
+                        > span {
+                            color: g.$primary-blue;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+            }
+        }
+        .connecting-line {
+            position: absolute;
+            height: 3rem;
+            width: 2px;
+            background-color: g.$border-colour;
+            left: 2.2rem;
+            top: 3.8rem;
+        }
+    }
+}

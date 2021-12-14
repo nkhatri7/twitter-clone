@@ -1,0 +1,47 @@
+@use '../../global' as g;
+
+.compose-tweet-main-container {
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    > .compose-tweet-profile-pic {
+        max-width: 3rem;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+    }
+    > .tweet-input-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 81%;
+        > .tweet-input {
+            background-color: #000000;
+            color: #FFFFFF;
+            border: none;
+            padding: 1rem 0 0.5rem 0.3rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border-bottom: 1px solid g.$border-colour;
+            min-height: 10rem;
+            height: auto;
+            resize: none;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+            &::placeholder {
+                color: g.$secondary-text-colour;
+            }
+            &:focus {
+                outline: none !important;
+            }
+        }
+        > .limit-warning {
+            color: g.$primary-red;
+            font-size: 0.9rem;
+            display: none;
+        }
+    }
+}

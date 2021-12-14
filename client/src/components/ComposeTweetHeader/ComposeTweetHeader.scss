@@ -1,0 +1,30 @@
+@use '../../global' as g;
+
+.compose-tweet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid g.$border-colour;
+    > .back-btn {
+        background: url('../../assets/images/left-arrow.svg') no-repeat center;
+        background-size: 1rem;
+        height: 1rem;
+        width: 1.5rem;
+        border: none;
+        > .hidden {
+            display: none;
+        }
+    }
+    > .tweet-btn {
+        background-color: g.$primary-blue;
+        padding: 0.45rem 1.05rem;
+        color: white;
+        font-weight: 800;
+        border: none;
+        border-radius: 50px;
+        &:disabled {
+            opacity: 0.5;
+        }
+    }
+}

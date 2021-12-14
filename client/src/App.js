@@ -12,6 +12,7 @@ import Notifications from './routes/Notifications/Notifications';
 import SignUp from './routes/SignUp/SignUp';
 import NewTweet from './routes/NewTweet/NewTweet';
 import DetailedTweet from './routes/DetailedTweet/DetailedTweet';
+import ReplyTweet from './routes/ReplyTweet/ReplyTweet';
 
 const App = () => {
 
@@ -119,6 +120,10 @@ const App = () => {
               handleDeleteTweet={handleDeleteTweet}
             />
           }
+        />
+        <Route 
+          path="/:username/status/:tweetId/reply"
+          element={<ReplyTweet handleReply={handleReply} />}  
         />
         <Route path="/compose/tweet" element={<NewTweet handleNewTweet={handleNewTweet} />} />
         <Route path="/explore" element={<Explore activeUser={activeUser} />} />

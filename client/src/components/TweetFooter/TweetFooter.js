@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router';
 import './TweetFooter.scss';
 
-const TweetFooter = ({ tweet, activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet }) => {
+const TweetFooter = ({ tweet, user, activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet }) => {
 
     const likeButton = useRef(null);
     const retweetButton = useRef(null);
+    const navigate = useNavigate();
 
     const checkLiked = () => {
         const userLikes = activeUser.likes;
@@ -54,7 +56,13 @@ const TweetFooter = ({ tweet, activeUser, handleLike, handleUnlike, handleRetwee
 
     return (
         <div className="tweet-footer">
-            <button className="tweet-action reply-button" aria-label="Reply to tweet">{tweet.replies.length}</button>
+            <button 
+                className="tweet-action reply-button" 
+                aria-label="Reply to tweet"
+                onClick={() => navigate(`/${user.username}/status/${tweet._id}/reply`)}
+            >
+                {tweet.replies.length}
+            </button>
             <button 
                 className="tweet-action retweet-button" 
                 aria-label="Retweet"

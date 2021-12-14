@@ -83,6 +83,7 @@ const Tweet = ({
                 <div className="tweet-main" onClick={() => navigate(`/${user.username}/status/${tweet._id}`)}>{tweet.text}</div>
                 <TweetFooter
                     tweet={tweet}
+                    user={user}
                     activeUser={activeUser} 
                     handleLike={handleLike} 
                     handleUnlike={handleUnlike} 
