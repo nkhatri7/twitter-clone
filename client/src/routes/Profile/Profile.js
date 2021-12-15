@@ -16,7 +16,9 @@ const Profile = ({
     handleRetweet, 
     handleRemoveRetweet, 
     handleDeleteReply, 
-    handleDeleteTweet 
+    handleDeleteTweet,
+    handleFollowUser,
+    handleUnfollowUser
 }) => {
 
     const { username } = useParams();
@@ -51,28 +53,16 @@ const Profile = ({
         if (user) {
             const userTweets = user.tweets;
             if (userTweets.length > 0) {
-                const allTweets = [];
-                userTweets.forEach(tweetId => {
-                    axios.get(`http://localhost:5000/api/tweets/${tweetId}`)
-                        .then(res => {
-                            allTweets.push(res.data);
-                            setTweets(allTweets);
-                        })
-                        .catch(err => console.log(err));
-                });
+                axios.get(`http://localhost:5000/api/users/${user._id}/tweets`)
+                    .then(res => setTweets(res.data))
+                    .catch(err => console.log(err));
             }
-        
+
             const userLikes = user.likes;
             if (userLikes.length > 0) {
-                const allLikedTweets = [];
-                userLikes.forEach(tweetId => {
-                    axios.get(`http://localhost:5000/api/tweets/${tweetId}`)
-                        .then(res => {
-                            allLikedTweets.push(res.data);
-                            setLikedTweets(allLikedTweets);
-                        })
-                        .catch(err => console.log(err));
-                });
+                axios.get(`http://localhost:5000/api/users/${user._id}/likes`)
+                    .then(res => setLikedTweets(res.data))
+                    .catch(err => console.log(err));
             }
         }
     }, [user]);
@@ -96,6 +86,14 @@ const Profile = ({
         const tabs = [tweetTab, repliesTab, mediaTab, likesTab];
         tabs.forEach(tab => tab === activeTab ? tab.current.classList.add('active-tab') : tab.current.classList.remove('active-tab'));
     }, [activeTab]);
+
+    const handleFollowEvent = () => {
+        if (activeUser.following.includes(user._id)) {
+            handleUnfollowUser(user._id);
+        } else {
+            handleFollowUser(user._id);
+        }
+    }
 
     const getJoinedDate = () => {
         const creationDate = new Date(user.createdAt);
@@ -140,7 +138,7 @@ const Profile = ({
                     <Tweet
                         key={tweet._id}
                         tweet={tweet}
-                        user={activeTab === likesTab ? likedTweetUser : activeUser}
+                        user={activeTab === likesTab ? likedTweetUser : user}
                         activeUser={activeUser}
                         handleLike={handleLike}
                         handleUnlike={handleUnlike}
@@ -184,6 +182,7 @@ const Profile = ({
                                             className={
                                                 `follow-btn ${activeUser.following.includes(user._id) ? `following` : `follow`}`
                                             }
+                                            onClick={handleFollowEvent}
                                         >
                                         {activeUser.following.includes(user._id) ? 'Following' : 'Follow'}
                                         </button>

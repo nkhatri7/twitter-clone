@@ -87,6 +87,18 @@ const App = () => {
       .catch(err => console.log(err));
   }
 
+  const handleFollowUser = (userId) => {
+    axios.put(`http://localhost:5000/api/users/${userId}/follow`, { userId: activeUser._id })
+      .then(res => setActiveUser(res.data.currentUser))
+      .catch(err => console.log(err));
+  }
+
+  const handleUnfollowUser = (userId) => {
+    axios.put(`http://localhost:5000/api/users/${userId}/unfollow`, { userId: activeUser._id })
+      .then(res => setActiveUser(res.data.currentUser))
+      .catch(err => console.log(err));
+  }
+
   return (
     <Router>
       <Routes>
@@ -138,6 +150,8 @@ const App = () => {
               handleRemoveRetweet={handleRemoveRetweet}
               handleDeleteReply={handleDeleteReply}
               handleDeleteTweet={handleDeleteTweet}
+              handleFollowUser={handleFollowUser}
+              handleUnfollowUser={handleUnfollowUser}
             />
           } 
         />

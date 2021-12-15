@@ -75,7 +75,7 @@ router.put('/:id/follow', async (req, res) => {
             $push: { followers: req.body.userId }
         }, { new: true });
         const currentUser = await User.findByIdAndUpdate(req.body.userId, {
-            $push: { followers: req.body.userId }
+            $push: { following: req.params.id }
         }, { new: true });
 
         res.status(200).json({
@@ -94,7 +94,7 @@ router.put('/:id/unfollow', async (req, res) => {
             $pull: { followers: req.body.userId }
         }, { new: true });
         const currentUser = await User.findByIdAndUpdate(req.body.userId, {
-            $pull: { followers: req.body.userId }
+            $pull: { following: req.params.id }
         }, { new: true });
 
         res.status(200).json({
