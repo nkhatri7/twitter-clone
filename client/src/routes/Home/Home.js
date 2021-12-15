@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
 import './Home.scss';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import MobileHeader from '../../components/MobileHeader/MobileHeader';
 import Tweet from '../../components/Tweet/Tweet';
 import TweetOptions from '../../components/TweetOptions/TweetOptions';
 import Overlay from '../../components/Overlay/Overlay';
+import NewTweetButton from '../../components/NewTweetButton/NewTweetButton';
 
 const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet, handleDeleteTweet }) => {
 
@@ -14,8 +14,6 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
     const [users, setUsers] = useState([]);
     const [optionsDisplay, setOptionsDisplay] = useState(false);
     const [tweetOptions, setTweetOptions] = useState(null);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/tweets/timeline/all', { userId: activeUser._id })
@@ -36,10 +34,6 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
                 .catch(err => console.log(err));
         });
     }, [tweets]);
-
-    const handleNewTweetNavigation = () => {
-        navigate('/compose/tweet');
-    }
 
     const handleTweetOptionsEvent = (tweet) => {
         setTweetOptions(tweet);
@@ -81,7 +75,7 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
                         {tweets.length > 0 ? tweetsDisplay : null}
                         <div className="no-more-tweets">No more tweets</div>
                     </div>
-                    <button className="new-tweet-btn" aria-label="New tweet" onClick={handleNewTweetNavigation}>+</button>
+                    <NewTweetButton />
                     {optionsDisplay === false ? null :
                         <TweetOptions 
                             handleOptionsView={handleOptionsView} 

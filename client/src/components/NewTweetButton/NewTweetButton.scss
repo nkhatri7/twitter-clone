@@ -1,0 +1,14 @@
+@use '../../global' as g;
+
+.new-tweet-btn {
+    position: fixed;
+    bottom: 4.5rem;
+    right: 1.2rem;
+    border: none;
+    border-radius: 50%;
+    height: 3.5rem;
+    width: 3.5rem;
+    color: #FFFFFF;
+    font-size: 3rem;
+    background-color: g.$primary-blue;
+}

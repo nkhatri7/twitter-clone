@@ -13,6 +13,7 @@ import SignUp from './routes/SignUp/SignUp';
 import NewTweet from './routes/NewTweet/NewTweet';
 import DetailedTweet from './routes/DetailedTweet/DetailedTweet';
 import ReplyTweet from './routes/ReplyTweet/ReplyTweet';
+import Profile from './routes/Profile/Profile';
 
 const App = () => {
 
@@ -126,6 +127,20 @@ const App = () => {
           element={<ReplyTweet handleReply={handleReply} />}  
         />
         <Route path="/compose/tweet" element={<NewTweet handleNewTweet={handleNewTweet} />} />
+        <Route 
+          path="/:username" 
+          element={
+            <Profile 
+              activeUser={activeUser}
+              handleLike={handleLike} 
+              handleUnlike={handleUnlike}
+              handleRetweet={handleRetweet}
+              handleRemoveRetweet={handleRemoveRetweet}
+              handleDeleteReply={handleDeleteReply}
+              handleDeleteTweet={handleDeleteTweet}
+            />
+          } 
+        />
         <Route path="/explore" element={<Explore activeUser={activeUser} />} />
         <Route path="/notifications" element={<Notifications activeUser={activeUser} />} />
         <Route path="/messages" element={<Messages activeUser={activeUser} />} />

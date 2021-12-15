@@ -25,6 +25,17 @@ router.get('/active/:id', async (req, res) => {
     }
 });
 
+// Get user by username
+router.get('/username/:username', async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.params.username });
+        const { email, password, isAdmin, updatedAt, ...otherDetails } = user._doc;
+        res.status(200).json(otherDetails);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 // Update user
 router.put('/:id', async (req, res) => {
     // Re-encrypt password

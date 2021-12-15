@@ -127,7 +127,7 @@ const DetailedTweet = ({
             <Tweet 
                 key={reply._id}
                 tweet={reply}
-                user={replyUser? replyUser : {}}
+                user={replyUser ? replyUser : {}}
                 activeUser={activeUser}
                 handleLike={handleLike}
                 handleUnlike={handleUnlike}
@@ -149,8 +149,8 @@ const DetailedTweet = ({
             <main>
                 <div className="tweet-header">
                     <div className="tweet-header-main">
-                        <img src={profilePic} alt="" className="profile-pic" />
-                        <div className="user-details">
+                        <img src={profilePic} alt="" className="profile-pic" onClick={() => navigate(`/${user.username}`)} />
+                        <div className="user-details" onClick={() => navigate(`/${user.username}`)}>
                             <span className="name">{user ? user.displayName : null}</span>
                             <span className="username">@{user ? user.username : null}</span>
                         </div>
