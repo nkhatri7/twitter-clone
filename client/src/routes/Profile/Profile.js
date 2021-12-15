@@ -189,7 +189,12 @@ const Profile = ({
                             }
                         </div>
                         <span className="profile-display-name">{user ? user.displayName : ''}</span>
-                        <span className="profile-username">@{user ? user.username : ''}</span>
+                        <div className="profile-username-container">
+                            <span className="profile-username">@{user ? user.username : ''}</span>
+                            {user === null ? null : (user.following.includes(activeUser._id)) ? 
+                                <div className="follows-you-tag">Follows you</div> : null
+                            }
+                        </div>
                         { user === null ? null : (user.bio) ? <span className="profile-bio">{user.bio}</span> : null }
                         <div className="joined-date">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6F767C">
