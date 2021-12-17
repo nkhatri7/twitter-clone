@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.scss';
@@ -17,7 +17,19 @@ import Profile from './routes/Profile/Profile';
 
 const App = () => {
 
-  const [activeUser, setActiveUser] = useState([]);
+  const [activeUser, setActiveUser] = useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem('activeUser')) {
+      setActiveUser(JSON.parse(localStorage.getItem('activeUser')));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeUser) {
+      localStorage.setItem('activeUser', JSON.stringify(activeUser));
+    }
+  }, [activeUser]);
 
   const handleSetActiveUser = (user) => {
     setActiveUser(user);

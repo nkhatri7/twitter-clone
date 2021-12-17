@@ -16,9 +16,11 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
     const [tweetOptions, setTweetOptions] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/tweets/timeline/all', { userId: activeUser._id })
+        if (activeUser) {
+            axios.get('http://localhost:5000/api/tweets/timeline/all', { userId: activeUser._id })
             .then(res => setTweets(res.data))
             .catch(err => console.log(err));
+        }
     }, [activeUser]);
 
     useEffect(() => {

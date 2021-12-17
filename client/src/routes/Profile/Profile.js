@@ -40,12 +40,14 @@ const Profile = ({
     const tweetsContainer = useRef(null);
 
     useEffect(() => {
-        if (username !== activeUser.username) {
-            axios.get(`http://localhost:5000/api/users/username/${username}`)
-                .then(res => setUser(res.data))
-                .catch(err => console.log(err));
-        } else {
-            setUser(activeUser);
+        if (activeUser) {
+            if (username !== activeUser.username) {
+                axios.get(`http://localhost:5000/api/users/username/${username}`)
+                    .then(res => setUser(res.data))
+                    .catch(err => console.log(err));
+            } else {
+                setUser(activeUser);
+            }
         }
     }, [username, activeUser]);
 
@@ -127,7 +129,7 @@ const Profile = ({
 
     const getTweetsDisplay = () => {
         if (tweets && likedTweets) {
-            getTweetContainerPosition();
+            setTweetContainerPosition();
             const tweetsDisplay = filterTweets().map(tweet => {
                 let likedTweetUser = {};
                 if (activeTab === likesTab) {
@@ -152,7 +154,7 @@ const Profile = ({
         }
     }
 
-    const getTweetContainerPosition = () => {
+    const setTweetContainerPosition = () => {
         tweetsContainer.current.style.top = `${profileMainContainer.current.offsetHeight + 51}px`;
     }
 
