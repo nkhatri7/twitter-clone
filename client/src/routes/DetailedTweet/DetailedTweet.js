@@ -87,19 +87,23 @@ const DetailedTweet = ({
         setOptionsDisplay(display => !display);
     }
 
+    const formatNumber = (num) => {
+        return num < 10 ? `0${num}` : num;
+    }
+
     const tweetTime = () => {
         const tweetDateTime = new Date(tweet.createdAt);
         if (tweetDateTime.getHours() > 12) {
-            return `${tweetDateTime.getHours() - 12}:${tweetDateTime.getMinutes()} PM`;
+            return `${tweetDateTime.getHours() - 12}:${formatNumber(tweetDateTime.getMinutes())} PM`;
         } else {
-            return `${tweetDateTime.getHours()}:${tweetDateTime.getMinutes()} AM`;
+            return `${tweetDateTime.getHours()}:${formatNumber(tweetDateTime.getMinutes())} AM`;
         }
     }
 
     const tweetDate = () => {
         const tweetDateTime = new Date(tweet.createdAt);
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return `${tweetDateTime.getDate()} ${months[tweetDateTime.getMonth()]} ${tweetDateTime.getFullYear()}`;
+        return `${formatNumber(tweetDateTime.getDate())} ${months[tweetDateTime.getMonth()]} ${tweetDateTime.getFullYear()}`;
     }
 
     const handleReplyInputChange = (e) => {

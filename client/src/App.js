@@ -14,6 +14,7 @@ import NewTweet from './routes/NewTweet/NewTweet';
 import DetailedTweet from './routes/DetailedTweet/DetailedTweet';
 import ReplyTweet from './routes/ReplyTweet/ReplyTweet';
 import Profile from './routes/Profile/Profile';
+import ProfileSettings from './routes/ProfileSettings/ProfileSettings';
 
 const App = () => {
 
@@ -33,6 +34,17 @@ const App = () => {
 
   const handleSetActiveUser = (user) => {
     setActiveUser(user);
+  }
+
+  const handleUpdateProfile = (name, bio) => {
+    const body = {
+      displayName: name,
+      bio: bio
+    };
+
+    axios.put(`http://localhost:5000/api/users/${activeUser._id}`, body)
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
   }
 
   const handleNewTweet = (tweetText) => {
@@ -170,6 +182,15 @@ const App = () => {
         <Route path="/explore" element={<Explore activeUser={activeUser} />} />
         <Route path="/notifications" element={<Notifications activeUser={activeUser} />} />
         <Route path="/messages" element={<Messages activeUser={activeUser} />} />
+        <Route 
+          path="/settings/profile" 
+          element={
+            <ProfileSettings 
+              activeUser={activeUser} 
+              handleUpdateProfile={handleUpdateProfile}
+            />
+          } 
+        />
       </Routes>
     </Router>
   );

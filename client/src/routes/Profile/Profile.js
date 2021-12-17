@@ -88,7 +88,7 @@ const Profile = ({
         const tabs = [tweetTab, repliesTab, mediaTab, likesTab];
         tabs.forEach(tab => tab === activeTab ? tab.current.classList.add('active-tab') : tab.current.classList.remove('active-tab'));
     }, [activeTab]);
-
+    
     const handleFollowEvent = () => {
         if (activeUser.following.includes(user._id)) {
             handleUnfollowUser(user._id);
@@ -178,7 +178,10 @@ const Profile = ({
                             {
                                 user === null ? null 
                                     : (user._id === activeUser._id) ?
-                                        <button className="edit-account-btn">Edit profile</button> 
+                                        <button 
+                                            className="edit-account-btn" 
+                                            onClick={() => navigate('/settings/profile')}
+                                        >Edit profile</button> 
                                     : 
                                         <button 
                                             className={
