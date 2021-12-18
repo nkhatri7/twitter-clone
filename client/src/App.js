@@ -18,6 +18,7 @@ import ProfileSettings from './routes/ProfileSettings/ProfileSettings';
 import Settings from './routes/Settings/Settings';
 import AccountSettings from './routes/AccountSettings/AccountSettings';
 import ChangePassword from './routes/ChangePassword/ChangePassword';
+import DeactivateAccount from './routes/DeactivateAccount/DeactivateAccount';
 
 const App = () => {
 
@@ -53,6 +54,15 @@ const App = () => {
   const handleChangePassword = (newPassword) => {
     axios.put(`http://localhost:5000/api/users/${activeUser._id}`, { password: newPassword })
       .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
+  const handleDeactivateAccount = () => {
+    axios.delete(`http://localhost:5000/api/users/${activeUser._id}`)
+      .then(res => {
+        console.log(res);
+        setActiveUser(null);
+      })
       .catch(err => console.log(err));
   }
 
@@ -210,6 +220,15 @@ const App = () => {
               handleChangePassword={handleChangePassword} 
             />
           } 
+        />
+        <Route 
+          path="/settings/deactivate"
+          element={
+            <DeactivateAccount 
+              activeUser={activeUser}
+              handleDeactivateAccount={handleDeactivateAccount}
+            />
+          }
         />
       </Routes>
     </Router>

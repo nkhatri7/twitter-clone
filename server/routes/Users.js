@@ -61,6 +61,45 @@ router.put('/:id', async (req, res) => {
 // Delete user
 router.delete('/:id', async (req, res) => {
     try {
+        const user = await User.findById(req.params.id);
+
+        // Remove everything user has interacted with including other users and tweets
+        if (user.following.length > 0) {
+            const userFollowingList = user.following;
+            userFollowingList.forEach(async userId => {
+                await User.findByIdAndUpdate(userId, {
+                    $pull: { followers: req.params.id }
+                });
+            });
+        }
+
+        if (user.followers.length > 0) {
+            const userFollowers = user.followers;
+            userFollowers.forEach(async userId => {
+                await User.findByIdAndUpdate(userId, {
+                    $pull: { following: req.params.id }
+                });
+            });
+        }
+
+        if (user.likes.length > 0) {
+            const likes = user.likes;
+            likes.forEach(async tweetId => {
+                await Tweet.findByIdAndUpdate(tweetId, {
+                    $pull: { likes: req.params.id }
+                });
+            });
+        }
+
+        if (user.retweets.length > 0) {
+            const retweets = user.retweets;
+            retweets.forEach(async tweetId => {
+                await Tweet.findByIdAndUpdate(tweetId, {
+                    $pull: { retweets: req.params.id }
+                });
+            });
+        }
+        
         await User.findByIdAndDelete(req.params.id);
         res.status(200).json('Account has been deleted');
     } catch (err) {

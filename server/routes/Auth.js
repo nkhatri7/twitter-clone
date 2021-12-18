@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
                 email: req.body.email,
                 username: req.body.username,
                 password: hashedPassword,
-                displayName: req.body.displayName,
+                displayName: req.body.displayName
             });
 
             // Save new user and send back user object
