@@ -1,42 +1,6 @@
 @use '../../global' as g;
 
-@mixin flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
 .account-settings {
-    > .account-settings-header {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-        padding: 0.55rem 1rem;
-        > .back {
-            background: url('../../assets/images/left-arrow.svg') no-repeat center;
-            background-size: 1rem;
-            height: 1rem;
-            width: 1.2rem;
-            border: none;
-            > .hidden {
-                display: none;
-            }
-        }
-        > .account-settings-header-content {
-            @include flex-column();
-            margin-left: 2.4rem;
-            > h1 {
-                color: #FFFFFF;
-                font-size: 1rem;
-            }
-            > .account-settings-user-username {
-                color: g.$secondary-text-colour;
-                font-size: 0.8rem;
-            }
-        }
-    }
     > .account-settings-main {
         width: 100%;
         padding: 1rem;
@@ -49,7 +13,7 @@
         > .account-settings-nav {
             width: 100%;
             > ul {
-                @include flex-column();
+                @include g.flex-column();
                 width: 100%;
                 > .account-settings-link-container {
                     width: 100%;
@@ -73,7 +37,7 @@
                                 margin: 0 0.9rem;
                             }
                             > .account-settings-link-text {
-                                @include flex-column();
+                                @include g.flex-column();
                                 max-width: 80%;
                                 margin-left: 0.9rem;
                                 > .link-title {

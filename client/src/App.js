@@ -19,6 +19,7 @@ import Settings from './routes/Settings/Settings';
 import AccountSettings from './routes/AccountSettings/AccountSettings';
 import ChangePassword from './routes/ChangePassword/ChangePassword';
 import DeactivateAccount from './routes/DeactivateAccount/DeactivateAccount';
+import AccountInformation from './routes/AccountInformation/AccountInformation';
 
 const App = () => {
 
@@ -212,6 +213,7 @@ const App = () => {
           } 
         />
         <Route path="/settings/account" element={<AccountSettings activeUser={activeUser} />} />
+        <Route path="/settings/your_twitter_data/account" element={<AccountInformation activeUser={activeUser} />} />
         <Route 
           path="/settings/password" 
           element={

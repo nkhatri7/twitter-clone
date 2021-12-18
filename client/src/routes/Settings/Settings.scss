@@ -1,47 +1,12 @@
 @use '../../global' as g;
 
 .settings {
-    > .settings-header {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-        padding: 0.55rem 1rem;
-        > .back {
-            background: url('../../assets/images/left-arrow.svg') no-repeat center;
-            background-size: 1rem;
-            height: 1rem;
-            width: 1.2rem;
-            border: none;
-            > .hidden {
-                display: none;
-            }
-        }
-        > .settings-header-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            margin-left: 2.4rem;
-            > h1 {
-                color: #FFFFFF;
-                font-size: 1rem;
-            }
-            > .settings-user-username {
-                color: g.$secondary-text-colour;
-                font-size: 0.8rem;
-            }
-        }
-    }
     > .settings-main {
         width: 100%;
         > .settings-nav {
             width: 100%;
             > ul {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
+                @include g.flex-column();
                 width: 100%;
                 padding: 1rem;
                 > .settings-link-container {

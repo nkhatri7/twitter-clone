@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './ChangePassword.scss';
+import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 
 const ChangePassword = ({ activeUser, handleChangePassword }) => {
 
@@ -78,15 +79,7 @@ const ChangePassword = ({ activeUser, handleChangePassword }) => {
 
     return (
         <div className='change-password'>
-            <header className="change-password-header">
-                <button className="back" aria-label='Go back' onClick={() => navigate(-1)}>
-                    <span className="hidden">Back</span>
-                </button>
-                <div className="change-password-header-content">
-                    <h1>Change your password</h1>
-                    <span className="change-password-user-username">@{activeUser ? activeUser.username : ''}</span>
-                </div>
-            </header>
+            <SettingsHeader activeUser={activeUser} pageTitle={'Change your password'} />
             <main className="change-password-main">
                 <div className="change-password-input-container current-password-container">
                     <input 

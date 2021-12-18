@@ -1,23 +1,14 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
+import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import './Settings.scss';
 
 const Settings = ({ activeUser }) => {
 
-    const navigate = useNavigate();
-
     return (
         <div className='settings'>
-            <header className="settings-header">
-                <button className="back" aria-label='Go back' onClick={() => navigate(-1)}>
-                    <span className="hidden">Back</span>
-                </button>
-                <div className="settings-header-content">
-                    <h1>Settings</h1>
-                    <span className="settings-user-username">@{activeUser ? activeUser.username : ''}</span>
-                </div>
-            </header>
+            <SettingsHeader activeUser={activeUser} pageTitle={'Settings'} />
             <main className="settings-main">
                 <nav className="settings-nav">
                     <ul>

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './DeactivateAccount.scss';
 import profilePic from '../../assets/images/default-profile-pic.png';
 import axios from 'axios';
+import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 
 const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
 
@@ -64,15 +65,10 @@ const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
 
     return (
         <div className='deactivate-account'>
-            <header className="deactivate-account-header">
-                <button className="back" aria-label='Go back' onClick={() => navigate(-1)}>
-                    <span className="hidden">Back</span>
-                </button>
-                <div className="deactivate-account-header-content">
-                    {deactivateClicked ? <h1>Confirm your password</h1> : <h1>Deactivate Account</h1>}
-                    <span className="deactivate-account-user-username">@{activeUser ? activeUser.username : ''}</span>
-                </div>
-            </header>
+            <SettingsHeader 
+                activeUser={activeUser} 
+                pageTitle={deactivateClicked ? 'Confirm your password' : 'Deactivate Account'} 
+            />
             {deactivateClicked === false ? 
                 <main className="deactivate-account-main">
                     <div className="profile-container" onClick={() => navigate(`/${activeUser.username}`)}>
