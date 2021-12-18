@@ -16,6 +16,7 @@ import ReplyTweet from './routes/ReplyTweet/ReplyTweet';
 import Profile from './routes/Profile/Profile';
 import ProfileSettings from './routes/ProfileSettings/ProfileSettings';
 import Settings from './routes/Settings/Settings';
+import AccountSettings from './routes/AccountSettings/AccountSettings';
 
 const App = () => {
 
@@ -183,17 +184,17 @@ const App = () => {
         <Route path="/explore" element={<Explore activeUser={activeUser} />} />
         <Route path="/notifications" element={<Notifications activeUser={activeUser} />} />
         <Route path="/messages" element={<Messages activeUser={activeUser} />} />
-        <Route path="/settings" element={<Settings activeUser={activeUser} />} >
-          <Route 
-            path="/settings/profile" 
-            element={
-              <ProfileSettings 
-                activeUser={activeUser} 
-                handleUpdateProfile={handleUpdateProfile}
-              />
-            } 
-          />
-        </Route>
+        <Route path="/settings" element={<Settings activeUser={activeUser} />} />
+        <Route 
+          path="/settings/profile" 
+          element={
+            <ProfileSettings 
+              activeUser={activeUser} 
+              handleUpdateProfile={handleUpdateProfile}
+            />
+          } 
+        />
+        <Route path="/settings/account" element={<AccountSettings activeUser={activeUser} />} />
       </Routes>
     </Router>
   );
