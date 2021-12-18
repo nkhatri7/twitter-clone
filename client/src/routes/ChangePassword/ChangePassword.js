@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './ChangePassword.scss';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
+import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 
 const ChangePassword = ({ activeUser, handleChangePassword }) => {
 
@@ -120,6 +121,7 @@ const ChangePassword = ({ activeUser, handleChangePassword }) => {
                 <div className="save-btn-container">
                     <button className="change-password-save-btn" disabled={disabled} onClick={handleSaveEvent}>Save</button>
                 </div>
+                <MobileFooterMenu page={'change password'} />
             </main>
         </div>
     );

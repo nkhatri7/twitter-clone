@@ -4,6 +4,7 @@ import './DeactivateAccount.scss';
 import profilePic from '../../assets/images/default-profile-pic.png';
 import axios from 'axios';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
+import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 
 const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
 
@@ -107,6 +108,7 @@ const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
                     <div className="deactivate-btn-container">
                         <button className="deactivate-btn" onClick={() => setDeactivateClicked(true)}>Deactivate</button>
                     </div>
+                    <MobileFooterMenu page={'deactivate account'} />
                 </main>
                 :
                 <main className="deactivate-account-main">
@@ -131,6 +133,7 @@ const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
                     <div className="deactivate-confirmation-btn-container">
                         <button className="deactivate-confirmation-btn" onClick={handleDeactivate}>Deactivate</button>
                     </div>
+                    <MobileFooterMenu page={'deactivate account'} />
                 </main>
             }
         </div>
