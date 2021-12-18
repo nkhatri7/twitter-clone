@@ -171,4 +171,20 @@ router.get('/:id/bookmarks', async (req, res) => {
     }
 });
 
+// Validate password
+router.post('/password/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!validPassword) {
+            res.status(406).json("Incorrect password");
+        } else {
+            // Send back user object
+            res.status(200).json("Valid password");
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

@@ -7,3 +7,10 @@ $light-grey: #AAB8C2;
 $border-colour: #303336;
 $secondary-text-colour: #6F767C;
 $primary-red: #E03B39;
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

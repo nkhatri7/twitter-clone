@@ -17,6 +17,7 @@ import Profile from './routes/Profile/Profile';
 import ProfileSettings from './routes/ProfileSettings/ProfileSettings';
 import Settings from './routes/Settings/Settings';
 import AccountSettings from './routes/AccountSettings/AccountSettings';
+import ChangePassword from './routes/ChangePassword/ChangePassword';
 
 const App = () => {
 
@@ -45,6 +46,12 @@ const App = () => {
     };
 
     axios.put(`http://localhost:5000/api/users/${activeUser._id}`, body)
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
+  const handleChangePassword = (newPassword) => {
+    axios.put(`http://localhost:5000/api/users/${activeUser._id}`, { password: newPassword })
       .then(res => setActiveUser(res.data))
       .catch(err => console.log(err));
   }
@@ -195,6 +202,15 @@ const App = () => {
           } 
         />
         <Route path="/settings/account" element={<AccountSettings activeUser={activeUser} />} />
+        <Route 
+          path="/settings/password" 
+          element={
+            <ChangePassword 
+              activeUser={activeUser} 
+              handleChangePassword={handleChangePassword} 
+            />
+          } 
+        />
       </Routes>
     </Router>
   );
