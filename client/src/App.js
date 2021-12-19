@@ -20,6 +20,7 @@ import AccountSettings from './routes/AccountSettings/AccountSettings';
 import ChangePassword from './routes/ChangePassword/ChangePassword';
 import DeactivateAccount from './routes/DeactivateAccount/DeactivateAccount';
 import AccountInformation from './routes/AccountInformation/AccountInformation';
+import ChangeUsername from './routes/ChangeUsername/ChangeUsername';
 
 const App = () => {
 
@@ -48,6 +49,12 @@ const App = () => {
     };
 
     axios.put(`http://localhost:5000/api/users/${activeUser._id}`, body)
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
+  const handleUsernameChange = (newUsername) => {
+    axios.put(`http://localhost:5000/api/users/${activeUser._id}`, { username: newUsername })
       .then(res => setActiveUser(res.data))
       .catch(err => console.log(err));
   }
@@ -214,6 +221,15 @@ const App = () => {
         />
         <Route path="/settings/account" element={<AccountSettings activeUser={activeUser} />} />
         <Route path="/settings/your_twitter_data/account" element={<AccountInformation activeUser={activeUser} />} />
+        <Route 
+          path="settings/username" 
+          element={
+            <ChangeUsername 
+              activeUser={activeUser} 
+              handleUsernameChange={handleUsernameChange} 
+            />
+          } 
+        />
         <Route 
           path="/settings/password" 
           element={

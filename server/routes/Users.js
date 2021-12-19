@@ -226,4 +226,18 @@ router.post('/password/:id', async (req, res) => {
     }
 });
 
+// Check if username is available
+router.post('/username', async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.body.username });
+        if (!user) {
+            res.status(200).json('Username is available');
+        } else {
+            res.status(406).json('Username is taken');
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

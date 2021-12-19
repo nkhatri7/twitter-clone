@@ -1,0 +1,64 @@
+@use '../../global' as g;
+
+.change-username-main {
+    @include g.flex-column();
+    width: 100%;
+    > .change-username-input-container {
+        @include g.flex-column();
+        width: 100%;
+        padding: 1rem;
+        border-bottom: 1px solid g.$border-colour;
+        > label {
+            color: g.$secondary-text-colour;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        > .change-username-input {
+            background-color: transparent;
+            color: #FFFFFF;
+            padding: 1rem 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid g.$border-colour;
+            border-radius: 5px;
+            width: 100%;
+            &::placeholder {
+                color: g.$secondary-text-colour;
+            }
+            &:focus {
+                outline: 2px solid g.$primary-blue !important;
+            }
+        }
+        > .error-message {
+            color: g.$primary-red;
+            font-size: 0.8rem;
+            margin: 0.3rem;
+            padding-left: 0.5rem;
+            display: none;
+        }
+        > .input-error {
+            border: 1px solid g.$primary-red !important;
+            &:focus {
+                outline: 2px solid g.$primary-red !important;
+            }
+        }
+    }
+    > .save-btn-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        padding: 1rem;
+        > .save-btn {
+            background-color: g.$primary-blue;
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 50px;
+            &:disabled {
+                opacity: 0.5;
+            }
+        }
+    }
+}
