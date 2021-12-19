@@ -1,12 +1,5 @@
 @use '../../global' as g;
 
-@mixin flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
 @mixin flex {
     display: flex;
     justify-content: flex-start;
@@ -19,6 +12,11 @@
         justify-content: flex-start;
         align-items: center;
         padding: 0.5rem 1rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        width: 100%;
         > .back-btn {
             background: url('../../assets/images/left-arrow.svg') no-repeat center;
             background-size: 1rem;
@@ -30,7 +28,7 @@
             }
         }
         > .profile-header-user-details {
-            @include flex-column();
+            @include g.flex-column();
             margin-left: 2.4rem;
             > .profile-header-user-name {
                 color: #FFFFFF;
@@ -45,8 +43,13 @@
     }
     > .profile-main {
         width: 100%;
+        position: absolute;
+        top: 51px;
+        bottom: 52.19px;
+        overflow-y: auto;
+        @include g.flex-column();
         > .profile-main-container {
-            @include flex-column();
+            @include g.flex-column();
             width: 100%;
             > .profile-cover-photo {
                 width: 100%;
@@ -54,7 +57,7 @@
                 background-color: g.$primary-blue;
             }
             > .profile-details {
-                @include flex-column();
+                @include g.flex-column();
                 width: 100%;
                 padding: 0.7rem 1rem;
                 > .profile-details-header {
@@ -173,15 +176,31 @@
         }
         > .tweets-container {
             width: 100%;
-            position: absolute;
-            left: 0;
-            bottom: 52.19px;
-            overflow-y: auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
             padding-bottom: 5rem;
+            > .tweet-container {
+                width: 100%;
+                > .retweet-container {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin: 0 0 -0.5rem 3rem;
+                    padding-top: 1rem;
+                    > .retweet-icon {
+                        max-width: 1rem;
+                    }
+                    > .retweet-text {
+                        color: g.$secondary-text-colour;
+                        font-size: 0.8rem;
+                        margin-left: 0.5rem;
+                        font-weight: 700;
+                    }
+                }
+            }
         }
     }
 }

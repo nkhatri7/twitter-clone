@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Profile.scss';
 import profilePic from '../../assets/images/default-profile-pic.png';
+import retweetIcon from '../../assets/images/retweet.svg';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import NewTweetButton from '../../components/NewTweetButton/NewTweetButton';
 import Tweet from '../../components/Tweet/Tweet';
@@ -25,6 +26,8 @@ const Profile = ({
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [tweets, setTweets] = useState(null);
+    const [retweets, setRetweets] = useState(null);
+    const [retweetUsers, setRetweetUsers] = useState(null);
     const [likedTweets, setLikedTweets] = useState(null);
     const [likedTweetsUsers, setLikedTweetsUsers] = useState(null);
     const [optionsDisplay, setOptionsDisplay] = useState(false);
@@ -35,9 +38,6 @@ const Profile = ({
     const mediaTab = useRef(null);
     const likesTab = useRef(null);
     const [activeTab, setActiveTab] = useState(tweetTab);
-
-    const profileMainContainer = useRef(null);
-    const tweetsContainer = useRef(null);
 
     useEffect(() => {
         if (activeUser) {
@@ -58,6 +58,8 @@ const Profile = ({
                 axios.get(`http://localhost:5000/api/users/${user._id}/tweets`)
                     .then(res => setTweets(res.data))
                     .catch(err => console.log(err));
+            } else {
+                setTweets([]);
             }
 
             const userLikes = user.likes;
@@ -65,9 +67,37 @@ const Profile = ({
                 axios.get(`http://localhost:5000/api/users/${user._id}/likes`)
                     .then(res => setLikedTweets(res.data))
                     .catch(err => console.log(err));
+            } else {
+                setLikedTweets([]);
+                setLikedTweetsUsers([]);
+            }
+
+            const userRetweets = user.retweets;
+            if (userRetweets.length > 0) {
+                axios.get(`http://localhost:5000/api/users/${user._id}/retweets`)
+                    .then(res => setRetweets(res.data))
+                    .catch(err => console.log(err));
+            } else {
+                setRetweets([]);
+                setRetweetUsers([]);
             }
         }
     }, [user]);
+
+    useEffect(() => {
+        if (retweets) {
+            const allRetweetUsers = [];
+            retweets.forEach(tweet => {
+                axios.get(`http://localhost:5000/api/users/${tweet.userId}`)
+                    .then(res => {
+                        allRetweetUsers.push(res.data);
+                        const uniqueUsers = [...new Map(allRetweetUsers.map(user => [user['username'], user])).values()];
+                        setRetweetUsers(uniqueUsers);
+                    })
+                    .catch(err => console.log(err));
+            });
+        }
+    }, [retweets]);
 
     useEffect(() => {
         if (likedTweets) {
@@ -113,49 +143,60 @@ const Profile = ({
         setOptionsDisplay(display => !display);
     }
 
+    const sortTweets = (tweets) => {
+        const sortedTweets = tweets.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        return sortedTweets;
+    }
+
     const filterTweets = () => {
         if (tweets && likedTweets) {
             if (activeTab === tweetTab) {
-                return tweets.filter(tweet => tweet.reply === false);
+                const filteredTweets = tweets.filter(tweet => tweet.reply === false);
+                return sortTweets([...filteredTweets, ...retweets]);
             } else if (activeTab === repliesTab) {
-                return tweets;
+                return sortTweets(tweets);
             } else if (activeTab === mediaTab) {
                 return [];
             } else if (activeTab === likesTab) {
-                return likedTweets;
+                return [...likedTweets].reverse();
             }
         }
     }
 
     const getTweetsDisplay = () => {
-        if (tweets && likedTweets) {
-            setTweetContainerPosition();
+        if (tweets && retweets && likedTweets && retweetUsers && likedTweetsUsers) {
             const tweetsDisplay = filterTweets().map(tweet => {
-                let likedTweetUser = {};
-                if (activeTab === likesTab) {
-                    likedTweetUser = likedTweetsUsers.find(user => user._id === tweet.userId);
-                }
-        
+                const tweetUsers = [...retweetUsers, ...likedTweetsUsers];
+                const tweetUser = tweetUsers.find(user => user._id === tweet.userId);
+                
                 return (
-                    <Tweet
-                        key={tweet._id}
-                        tweet={tweet}
-                        user={activeTab === likesTab ? likedTweetUser : user}
-                        activeUser={activeUser}
-                        handleLike={handleLike}
-                        handleUnlike={handleUnlike}
-                        handleRetweet={handleRetweet}
-                        handleRemoveRetweet={handleRemoveRetweet}
-                        handleTweetOptions={handleTweetOptionsEvent}
-                    />
+                    <div className="tweet-container" key={tweet._id}>
+                        {user.retweets.includes(tweet._id) ? 
+                            <div className="retweet-container">
+                                <img src={retweetIcon} alt="Retweet icon" className="retweet-icon" />
+                                <span className="retweet-text">
+                                    {user._id === activeUser._id ? 'You' : user.displayName}&nbsp;retweeted
+                                </span>
+                            </div>
+                            : null
+                        }
+                        <Tweet
+                            tweet={tweet}
+                            user={user._id === tweet.userId ? user : tweetUser}
+                            activeUser={activeUser}
+                            handleLike={handleLike}
+                            handleUnlike={handleUnlike}
+                            handleRetweet={handleRetweet}
+                            handleRemoveRetweet={handleRemoveRetweet}
+                            handleTweetOptions={handleTweetOptionsEvent}
+                        />
+                    </div>
                 );
             });
             return tweetsDisplay;
         }
-    }
-
-    const setTweetContainerPosition = () => {
-        tweetsContainer.current.style.top = `${profileMainContainer.current.offsetHeight + 51}px`;
     }
 
     return (
@@ -170,7 +211,7 @@ const Profile = ({
                 </div>
             </header>
             <main className="profile-main">
-                <div className="profile-main-container" ref={profileMainContainer}>
+                <div className="profile-main-container">
                     <div className="profile-cover-photo"></div>
                     <div className="profile-details">
                         <div className="profile-details-header">
@@ -241,7 +282,7 @@ const Profile = ({
                         >Likes</button>
                     </div>
                 </div>
-                <div className="tweets-container" ref={tweetsContainer}>
+                <div className="tweets-container">
                     { tweets ? getTweetsDisplay() : null}
                 </div>
                 <NewTweetButton />
