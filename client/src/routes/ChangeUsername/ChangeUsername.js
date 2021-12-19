@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import './ChangeUsername.scss';
+import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 
 const ChangeUsername = ({ activeUser, handleUsernameChange }) => {
 
@@ -72,6 +73,7 @@ const ChangeUsername = ({ activeUser, handleUsernameChange }) => {
                     <button className="save-btn" disabled={disabled} onClick={handleSaveClick}>Save</button>
                 </div>
             </main>
+            <MobileFooterMenu page={'change username'} />
         </div>
     );
 }

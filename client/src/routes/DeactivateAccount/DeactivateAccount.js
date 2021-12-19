@@ -108,7 +108,6 @@ const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
                     <div className="deactivate-btn-container">
                         <button className="deactivate-btn" onClick={() => setDeactivateClicked(true)}>Deactivate</button>
                     </div>
-                    <MobileFooterMenu page={'deactivate account'} />
                 </main>
                 :
                 <main className="deactivate-account-main">
@@ -133,9 +132,9 @@ const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
                     <div className="deactivate-confirmation-btn-container">
                         <button className="deactivate-confirmation-btn" onClick={handleDeactivate}>Deactivate</button>
                     </div>
-                    <MobileFooterMenu page={'deactivate account'} />
                 </main>
             }
+            <MobileFooterMenu page={'deactivate account'} />
         </div>
     );
 }

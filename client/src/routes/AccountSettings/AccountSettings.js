@@ -71,8 +71,8 @@ const AccountSettings = ({ activeUser }) => {
                         </li>
                     </ul>
                 </nav>
-                <MobileFooterMenu page={'account settings'} />
             </main>
+            <MobileFooterMenu page={'account settings'} />
         </div>
     );
 }

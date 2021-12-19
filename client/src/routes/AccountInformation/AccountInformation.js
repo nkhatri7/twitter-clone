@@ -54,7 +54,7 @@ const AccountInformation = ({ activeUser }) => {
                 </nav>
                 <div className="account-creation-container">
                     <span className="account-creation-title">Account creation</span>
-                    <span className="account-creation-time">{getAccountCreationTime()}</span>
+                    <span className="account-creation-time">{activeUser ? getAccountCreationTime() : ''}</span>
                 </div>
                 <MobileFooterMenu page={'account information'} />
             </main>

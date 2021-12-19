@@ -121,8 +121,8 @@ const ChangePassword = ({ activeUser, handleChangePassword }) => {
                 <div className="save-btn-container">
                     <button className="change-password-save-btn" disabled={disabled} onClick={handleSaveEvent}>Save</button>
                 </div>
-                <MobileFooterMenu page={'change password'} />
             </main>
+            <MobileFooterMenu page={'change password'} />
         </div>
     );
 }

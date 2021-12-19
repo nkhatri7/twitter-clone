@@ -38,8 +38,8 @@ const Settings = ({ activeUser }) => {
                         </li> 
                     </ul>
                 </nav>
-                <MobileFooterMenu page={'settings'} />
             </main>
+            <MobileFooterMenu page={'settings'} />
         </div>
     );
 }
