@@ -7,13 +7,25 @@ import Tweet from '../../components/Tweet/Tweet';
 import TweetOptions from '../../components/TweetOptions/TweetOptions';
 import Overlay from '../../components/Overlay/Overlay';
 import NewTweetButton from '../../components/NewTweetButton/NewTweetButton';
+import ShareTweet from '../../components/ShareTweet/ShareTweet';
 
-const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet, handleDeleteTweet }) => {
+const Home = ({ 
+    activeUser, 
+    handleLike, 
+    handleUnlike, 
+    handleRetweet, 
+    handleRemoveRetweet, 
+    handleDeleteTweet,
+    handleBookmark,
+    handleRemoveBookmark
+}) => {
 
     const [tweets, setTweets] = useState([]);
     const [users, setUsers] = useState([]);
     const [optionsDisplay, setOptionsDisplay] = useState(false);
     const [tweetOptions, setTweetOptions] = useState(null);
+    const [shareDisplay, setShareDisplay] = useState(false);
+    const [tweetShare, setTweetShare] = useState(null);
 
     useEffect(() => {
         if (activeUser) {
@@ -46,6 +58,15 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
         setOptionsDisplay(display => !display);
     } 
 
+    const handleShareTweetEvent = (tweet, user) => {
+        setTweetShare({tweet: tweet, user: user});
+        handleShareView();
+    }
+
+    const handleShareView = () => {
+        setShareDisplay(display => !display);
+    }
+
     const sortedTweets = tweets.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
     });
@@ -64,6 +85,7 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
                 handleRetweet={handleRetweet}
                 handleRemoveRetweet={handleRemoveRetweet}
                 handleTweetOptions={handleTweetOptionsEvent}
+                handleShareTweet={handleShareTweetEvent}
             />
         );
     });
@@ -85,7 +107,17 @@ const Home = ({ activeUser, handleLike, handleUnlike, handleRetweet, handleRemov
                             handleDeleteTweet={handleDeleteTweet}
                         />
                     }
-                    {optionsDisplay ? <Overlay /> : null}
+                    {optionsDisplay || shareDisplay ? <Overlay /> : null}
+                    {shareDisplay === false ? null :
+                        <ShareTweet
+                            tweet={tweetShare.tweet}
+                            user={tweetShare.user}
+                            activeUser={activeUser}
+                            handleShareView={handleShareView}
+                            handleBookmark={handleBookmark}
+                            handleRemoveBookmark={handleRemoveBookmark}
+                        />
+                    }
                 </main>
                 <MobileFooterMenu page="home" />
             </div>

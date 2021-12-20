@@ -210,6 +210,18 @@ router.get('/:id/bookmarks', async (req, res) => {
     }
 });
 
+// Clear bookmarks
+router.put('/:id/bookmarks/clear', async (req, res) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, {
+            $set: { bookmarks: [] }
+        }, { new: true });
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 // Validate password
 router.post('/password/:id', async (req, res) => {
     try {

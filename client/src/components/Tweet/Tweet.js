@@ -12,7 +12,8 @@ const Tweet = ({
     handleUnlike, 
     handleRetweet, 
     handleRemoveRetweet, 
-    handleTweetOptions 
+    handleTweetOptions,
+    handleShareTweet,
     }) => {
 
     const [originalTweetUsername, setOriginalTweetUsername] = useState(null);
@@ -95,6 +96,7 @@ const Tweet = ({
                     handleUnlike={handleUnlike} 
                     handleRetweet={handleRetweet} 
                     handleRemoveRetweet={handleRemoveRetweet}
+                    handleShareTweet={handleShareTweet}
                 />
             </div>
         </div>

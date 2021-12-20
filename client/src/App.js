@@ -22,6 +22,7 @@ import DeactivateAccount from './routes/DeactivateAccount/DeactivateAccount';
 import AccountInformation from './routes/AccountInformation/AccountInformation';
 import ChangeUsername from './routes/ChangeUsername/ChangeUsername';
 import ChangeEmail from './routes/ChangeEmail/ChangeEmail';
+import Bookmarks from './routes/Bookmarks/Bookmarks';
 
 const App = () => {
 
@@ -145,6 +146,24 @@ const App = () => {
       .catch(err => console.log(err));
   }
 
+  const handleBookmark = (tweetId) => {
+    axios.put(`http://localhost:5000/api/tweets/${tweetId}/bookmark`, { userId: activeUser._id })
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
+  const handleRemoveBookmark = (tweetId) => {
+    axios.put(`http://localhost:5000/api/tweets/${tweetId}/bookmark/remove`, { userId: activeUser._id })
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
+  const handleClearBookmarks = () => {
+    axios.put(`http://localhost:5000/api/users/${activeUser._id}/bookmarks/clear`)
+      .then(res => setActiveUser(res.data))
+      .catch(err => console.log(err));
+  }
+
   const handleFollowUser = (userId) => {
     axios.put(`http://localhost:5000/api/users/${userId}/follow`, { userId: activeUser._id })
       .then(res => setActiveUser(res.data.currentUser))
@@ -174,6 +193,8 @@ const App = () => {
               handleRetweet={handleRetweet}
               handleRemoveRetweet={handleRemoveRetweet}
               handleDeleteTweet={handleDeleteTweet}
+              handleBookmark={handleBookmark}
+              handleRemoveBookmark={handleRemoveBookmark}
             />
           } 
         />
@@ -189,6 +210,8 @@ const App = () => {
               handleReply={handleReply}
               handleDeleteReply={handleDeleteReply}
               handleDeleteTweet={handleDeleteTweet}
+              handleBookmark={handleBookmark}
+              handleRemoveBookmark={handleRemoveBookmark}
             />
           }
         />
@@ -210,12 +233,28 @@ const App = () => {
               handleDeleteTweet={handleDeleteTweet}
               handleFollowUser={handleFollowUser}
               handleUnfollowUser={handleUnfollowUser}
+              handleBookmark={handleBookmark}
+              handleRemoveBookmark={handleRemoveBookmark}
             />
           } 
         />
         <Route path="/explore" element={<Explore activeUser={activeUser} />} />
         <Route path="/notifications" element={<Notifications activeUser={activeUser} />} />
         <Route path="/messages" element={<Messages activeUser={activeUser} />} />
+        <Route 
+          path="/:username/bookmarks" 
+          element={
+            <Bookmarks 
+              activeUser={activeUser}
+              handleLike={handleLike}
+              handleUnlike={handleUnlike}
+              handleRetweet={handleRetweet}
+              handleRemoveRetweet={handleRemoveRetweet}
+              handleRemoveBookmark={handleRemoveBookmark}
+              handleClearBookmarks={handleClearBookmarks}
+            />
+          }
+        />
         <Route path="/settings" element={<Settings activeUser={activeUser} />} />
         <Route 
           path="/settings/profile" 

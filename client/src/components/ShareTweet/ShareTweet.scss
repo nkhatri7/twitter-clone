@@ -1,0 +1,44 @@
+@use '../../global' as g;
+
+.share-tweet {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 5;
+    border-radius: 20px 20px 0 0;
+    background-color: #000000;
+    padding: 1rem;
+    > ul {
+        > li {
+            list-style: none;
+            padding: 0.8rem 0;
+            > .share-option {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                background: none;
+                border: none;
+                width: 100%;
+                > svg {
+                    max-width: 1.5rem;
+                }
+                > span {
+                    margin-left: 1rem;
+                    color: #FFFFFF;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+    > .cancel-share {
+        width: 100%;
+        background: none;
+        border: 1px solid g.$secondary-text-colour;
+        border-radius: 50px;
+        color: #FFFFFF;
+        padding: 0.7rem 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-top: 1rem;
+    }
+}

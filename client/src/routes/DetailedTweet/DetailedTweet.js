@@ -6,6 +6,7 @@ import profilePic from '../../assets/images/default-profile-pic.png';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import TweetOptions from '../../components/TweetOptions/TweetOptions';
 import Overlay from '../../components/Overlay/Overlay';
+import ShareTweet from '../../components/ShareTweet/ShareTweet';
 import TweetFooter from '../../components/TweetFooter/TweetFooter';
 import Tweet from '../../components/Tweet/Tweet';
 
@@ -17,7 +18,9 @@ const DetailedTweet = ({
     handleRemoveRetweet,
     handleReply,
     handleDeleteReply,
-    handleDeleteTweet
+    handleDeleteTweet,
+    handleBookmark,
+    handleRemoveBookmark
 }) => {
 
     const { tweetId } = useParams();
@@ -30,6 +33,8 @@ const DetailedTweet = ({
     const [replyUsers, setReplyUsers] = useState([]);
     const [optionsDisplay, setOptionsDisplay] = useState(false);
     const [tweetOptions, setTweetOptions] = useState(null);
+    const [shareDisplay, setShareDisplay] = useState(false);
+    const [tweetShare, setTweetShare] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -87,6 +92,15 @@ const DetailedTweet = ({
         setOptionsDisplay(display => !display);
     }
 
+    const handleShareTweetEvent = (tweet, user) => {
+        setTweetShare({ tweet: tweet, user: user });
+        handleShareView();
+    }
+
+    const handleShareView = () => {
+        setShareDisplay(display => !display);
+    }
+
     const formatNumber = (num) => {
         return num < 10 ? `0${num}` : num;
     }
@@ -138,6 +152,7 @@ const DetailedTweet = ({
                 handleRetweet={handleRetweet}
                 handleRemoveRetweet={handleRemoveRetweet}
                 handleTweetOptions={handleTweetOptionsEvent}
+                handleShareTweet={handleShareTweetEvent}
             />
         );
     });
@@ -177,11 +192,13 @@ const DetailedTweet = ({
                 <div className="tweet-footer-container">
                     {tweet ? <TweetFooter 
                         tweet={tweet ? tweet : null}
+                        user={user ? user : null}
                         activeUser={activeUser} 
                         handleLike={handleLike} 
                         handleUnlike={handleUnlike} 
                         handleRetweet={handleRetweet} 
                         handleRemoveRetweet={handleRemoveRetweet}
+                        handleShareTweet={handleShareTweetEvent}
                     /> : null}
                 </div>
                 <div className="reply-container">
@@ -209,7 +226,17 @@ const DetailedTweet = ({
                         handleDeleteReply={handleDeleteReply}
                     />
                 }
-                {optionsDisplay ? <Overlay /> : null}
+                {optionsDisplay || shareDisplay ? <Overlay /> : null}
+                {shareDisplay === false ? null :
+                    <ShareTweet
+                        tweet={tweetShare.tweet}
+                        user={tweetShare.user}
+                        activeUser={activeUser}
+                        handleShareView={handleShareView}
+                        handleBookmark={handleBookmark}
+                        handleRemoveBookmark={handleRemoveBookmark}
+                    />
+                }
             </main>
             <MobileFooterMenu page="tweet" />
         </div>

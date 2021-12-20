@@ -2,7 +2,16 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import './TweetFooter.scss';
 
-const TweetFooter = ({ tweet, user, activeUser, handleLike, handleUnlike, handleRetweet, handleRemoveRetweet }) => {
+const TweetFooter = ({ 
+    tweet, 
+    user, 
+    activeUser, 
+    handleLike, 
+    handleUnlike, 
+    handleRetweet, 
+    handleRemoveRetweet, 
+    handleShareTweet 
+}) => {
 
     const likeButton = useRef(null);
     const retweetButton = useRef(null);
@@ -79,7 +88,7 @@ const TweetFooter = ({ tweet, user, activeUser, handleLike, handleUnlike, handle
             >
                 {tweet.likes.length}
             </button>
-            <button className="share-button" aria-label="Share">
+            <button className="share-button" aria-label="Share" onClick={() => handleShareTweet(tweet, user)}>
                 <span className="hidden">Share</span>
             </button>
         </div>

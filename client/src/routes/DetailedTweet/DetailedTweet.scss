@@ -1,10 +1,7 @@
 @use '../../global' as g;
 
 .detailed-tweet {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    @include g.flex-column();
     > header {
         display: flex;
         justify-content: flex-start;
@@ -30,6 +27,7 @@
     }
     > main {
         width: 100%;
+        @include g.flex-column();
         > .tweet-header {
             display: flex;
             justify-content: space-between;
