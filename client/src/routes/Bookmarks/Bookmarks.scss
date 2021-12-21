@@ -89,4 +89,15 @@
         border-left: 1px solid g.$border-colour;
         border-right: 1px solid g.$border-colour;
     }
+    .bookmark-options {
+        position: fixed !important;
+        bottom: auto !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 300px;
+        border: 1px solid g.$border-colour;
+        border-radius: 10px !important;
+        box-shadow: 0 0px 5px 5px #1a1a1a;
+    }
 }

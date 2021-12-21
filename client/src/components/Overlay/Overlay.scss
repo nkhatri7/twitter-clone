@@ -14,3 +14,9 @@
     animation-name: overlay-opacity;
     animation-duration: 0.5s;
 }
+
+@media screen and (min-width: 800px) {
+    .overlay {
+        display: none;
+    }
+}
