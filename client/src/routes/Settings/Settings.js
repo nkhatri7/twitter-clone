@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import './Settings.scss';
@@ -10,6 +11,7 @@ const Settings = ({ activeUser }) => {
         <div className='settings'>
             <SettingsHeader activeUser={activeUser} pageTitle={'Settings'} />
             <main className="settings-main">
+                <DesktopMenu activeUser={activeUser} page="Settings" />
                 <nav className="settings-nav">
                     <ul>
                         <li className='settings-link-container'>

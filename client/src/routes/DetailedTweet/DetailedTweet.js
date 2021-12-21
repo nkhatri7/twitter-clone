@@ -9,6 +9,7 @@ import Overlay from '../../components/Overlay/Overlay';
 import ShareTweet from '../../components/ShareTweet/ShareTweet';
 import TweetFooter from '../../components/TweetFooter/TweetFooter';
 import Tweet from '../../components/Tweet/Tweet';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const DetailedTweet = ({ 
     activeUser, 
@@ -166,6 +167,7 @@ const DetailedTweet = ({
                 <h1>Tweet</h1>
             </header>
             <main>
+                <DesktopMenu activeUser={activeUser} page="Detailed Tweet" />
                 <div className="tweet-header">
                     <div className="tweet-header-main">
                         <img src={profilePic} alt="" className="profile-pic" onClick={() => navigate(`/${user.username}`)} />

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import './ChangeUsername.scss';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const ChangeUsername = ({ activeUser, handleUsernameChange }) => {
 
@@ -57,6 +58,7 @@ const ChangeUsername = ({ activeUser, handleUsernameChange }) => {
         <div className='change-username'>
             <SettingsHeader activeUser={activeUser} pageTitle={'Change username'} />
             <main className="change-username-main">
+                <DesktopMenu activeUser={activeUser} page="Change Username" />
                 <div className="change-username-input-container">
                     <label htmlFor="username">Username</label>
                     <input 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import './ChangeEmail.scss';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const ChangeEmail = ({ activeUser, handleEmailChange }) => {
 
@@ -63,6 +64,7 @@ const ChangeEmail = ({ activeUser, handleEmailChange }) => {
         <div className='change-email'>
             <SettingsHeader activeUser={activeUser} pageTitle={'Change email'} />
             <main className="change-email-main">
+                <DesktopMenu activeUser={activeUser} page="Change Email" />
                 <div className="current-email-container">
                     <label htmlFor="current-email">Current email</label>
                     <input 

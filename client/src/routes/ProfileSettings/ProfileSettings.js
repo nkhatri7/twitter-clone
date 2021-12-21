@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfileSettings.scss';
 import profilePic from '../../assets/images/default-profile-pic.png';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const ProfileSettings = ({ activeUser, handleUpdateProfile }) => {
 
@@ -68,6 +69,7 @@ const ProfileSettings = ({ activeUser, handleUpdateProfile }) => {
                 <button className="profile-settings-save-btn" onClick={handleSave} disabled={disabled}>Save</button>
             </header>
             <main className="profile-settings-main">
+                <DesktopMenu activeUser={activeUser} page="Profile Settings" />
                 <div className="cover-image-container">
                     <div className="cover-image"></div>
                     <div className="cover-image-actions">

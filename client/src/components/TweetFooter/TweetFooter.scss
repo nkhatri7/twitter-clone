@@ -43,3 +43,31 @@
         }
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .tweet-action:hover, .share-button:hover {
+        cursor: pointer;
+    }
+    .reply-button:hover {
+        background: url('../../assets/images/reply-hover.svg') no-repeat center;
+        background-position: 0% 50%;
+        color: g.$primary-blue;
+        transition: 0.3s;
+    }
+    .retweet-button:not(.retweeted):hover {
+        background: url('../../assets/images/retweet-hover.svg') no-repeat center;
+        background-position: 0% 50%;
+        color: #53B681;
+        transition: 0.3s;
+    }
+    .like-button:not(.liked):hover {
+        background: url('../../assets/images/like-hover.svg') no-repeat center;
+        background-position: 0% 50%;
+        color: #E5397F;
+        transition: 0.3s;
+    }
+    .share-button:hover {
+        background: url('../../assets/images/share-hover.svg') no-repeat center;
+        transition: 0.3s;
+    }
+}

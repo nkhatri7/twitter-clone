@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import './AccountSettings.scss';
@@ -10,6 +11,7 @@ const AccountSettings = ({ activeUser }) => {
         <div className='account-settings'>
             <SettingsHeader activeUser={activeUser} pageTitle={'Your Account'} />
             <main className="account-settings-main">
+                <DesktopMenu activeUser={activeUser} page="Account Settings" />
                 <span className="account-settings-description">
                     See information about your account, change your password, or learn about your account deactivation options
                 </span>

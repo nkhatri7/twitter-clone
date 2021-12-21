@@ -5,8 +5,9 @@ import ComposeTweetHeader from '../../components/ComposeTweetHeader/ComposeTweet
 import './ReplyTweet.scss';
 import profilePic from '../../assets/images/default-profile-pic.png';
 import ComposeTweetMain from '../../components/ComposeTweetMain/ComposeTweetMain';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
-const ReplyTweet = ({ handleReply }) => {
+const ReplyTweet = ({ activeUser, handleReply }) => {
 
     const [replyText, setReplyText] = useState('');
     const [disabled, setDisabled] = useState(true);
@@ -57,6 +58,7 @@ const ReplyTweet = ({ handleReply }) => {
         <div className="reply-tweet">
             <ComposeTweetHeader disabled={disabled} handleReply={handleReply} type={'Reply'} tweetId={tweetId} text={replyText} />
             <main className="reply-tweet-main">
+                <DesktopMenu activeUser={activeUser} page="Reply Tweet" />
                 <div className="tweet">
                     <img className="tweet-profile-pic" src={profilePic} alt="" />
                     <div className="main-tweet-content">

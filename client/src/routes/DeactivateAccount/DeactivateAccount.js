@@ -5,6 +5,7 @@ import profilePic from '../../assets/images/default-profile-pic.png';
 import axios from 'axios';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
 
@@ -72,6 +73,7 @@ const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
             />
             {deactivateClicked === false ? 
                 <main className="deactivate-account-main">
+                    <DesktopMenu activeUser={activeUser} page="Deactivate Account" />
                     <div className="profile-container" onClick={() => navigate(`/${activeUser.username}`)}>
                         <img src={profilePic} alt="" className="profile-pic" />
                         <div className="profile-details">
@@ -111,6 +113,7 @@ const DeactivateAccount = ({ activeUser, handleDeactivateAccount }) => {
                 </main>
                 :
                 <main className="deactivate-account-main">
+                    <DesktopMenu activeUser={activeUser} page="Deactivate Account" />
                     <h2>Confirm your password</h2>
                     <div className="description-container">
                         <span className="description">

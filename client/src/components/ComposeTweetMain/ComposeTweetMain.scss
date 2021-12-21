@@ -6,6 +6,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     > .compose-tweet-profile-pic {
         max-width: 3rem;
         border-radius: 50%;
@@ -42,6 +44,17 @@
             color: g.$primary-red;
             font-size: 0.9rem;
             display: none;
+        }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .compose-tweet-main-container {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        border-bottom: 1px solid g.$border-colour;
+        .tweet-input {
+            border-bottom: none !important;
         }
     }
 }

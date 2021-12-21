@@ -1,6 +1,8 @@
 @use '../../global' as g;
 
 .settings {
+    max-width: 600px;
+    margin: 0 auto;
     > .settings-main {
         width: 100%;
         > .settings-nav {
@@ -30,5 +32,13 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .settings {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        border-bottom: 1px solid g.$border-colour;
     }
 }

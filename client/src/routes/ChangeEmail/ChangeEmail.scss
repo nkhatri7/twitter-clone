@@ -1,72 +1,84 @@
 @use '../../global' as g;
 
-.change-email-main {
-    @include g.flex-column();
-    width: 100%;
-    label {
-        font-size: 0.9rem;
-        color: g.$secondary-text-colour;
-        margin-bottom: 0.5rem
-    }
-    > .current-email-container, .new-email-input-container {
+.change-email {
+    max-width: 600px;
+    margin: 0 auto;
+    .change-email-main {
         @include g.flex-column();
         width: 100%;
-        padding: 1rem;
-    }
-    .current-email {
-        background-color: rgba(255, 255, 255, 0.08);
-        color: g.$secondary-text-colour;
-        font-size: 1rem;
-        padding: 1rem 0.5rem;
-        border: none;
-        border-radius: 5px;
-        width: 100%;
-    }
-    > .new-email-input-container {
-        border-bottom: 1px solid g.$border-colour;
-        > .new-email-input {
-            background-color: transparent;
-            color: #FFFFFF;
+        label {
+            font-size: 0.9rem;
+            color: g.$secondary-text-colour;
+            margin-bottom: 0.5rem
+        }
+        > .current-email-container, .new-email-input-container {
+            @include g.flex-column();
+            width: 100%;
+            padding: 1rem;
+        }
+        .current-email {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: g.$secondary-text-colour;
             font-size: 1rem;
             padding: 1rem 0.5rem;
-            border: 1px solid g.$border-colour;
+            border: none;
             border-radius: 5px;
             width: 100%;
-            &::placeholder {
-                color: g.$secondary-text-colour;
+        }
+        > .new-email-input-container {
+            border-bottom: 1px solid g.$border-colour;
+            > .new-email-input {
+                background-color: transparent;
+                color: #FFFFFF;
+                font-size: 1rem;
+                padding: 1rem 0.5rem;
+                border: 1px solid g.$border-colour;
+                border-radius: 5px;
+                width: 100%;
+                &::placeholder {
+                    color: g.$secondary-text-colour;
+                }
+                &:focus {
+                    outline: 2px solid g.$primary-blue !important;
+                }
             }
-            &:focus {
-                outline: 2px solid g.$primary-blue !important;
+            > .error-message {
+                color: g.$primary-red;
+                font-size: 0.8rem;
+                padding: 0.3rem 0.5rem;
+            }
+            > .input-error {
+                border: 1px solid g.$primary-red !important;
+                &:focus {
+                    outline: 2px solid g.$primary-red !important;
+                }
             }
         }
-        > .error-message {
-            color: g.$primary-red;
-            font-size: 0.8rem;
-            padding: 0.3rem 0.5rem;
-        }
-        > .input-error {
-            border: 1px solid g.$primary-red !important;
-            &:focus {
-                outline: 2px solid g.$primary-red !important;
+        > .update-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            padding: 1rem;
+            > .update-btn {
+                background-color: g.$primary-blue;
+                color: #FFFFFF;
+                font-size: 0.9rem;
+                font-weight: 700;
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 50px;
+                &:disabled {
+                    opacity: 0.5;
+                }
             }
         }
     }
-    > .update-btn-container {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        padding: 1rem;
-        > .update-btn {
-            background-color: g.$primary-blue;
-            color: #FFFFFF;
-            font-size: 0.9rem;
-            font-weight: 700;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 50px;
-            &:disabled {
-                opacity: 0.5;
-            }
-        }
+}
+
+@media screen and (min-width: 800px) {
+    .change-email {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        border-bottom: 1px solid g.$border-colour;
     }
 }

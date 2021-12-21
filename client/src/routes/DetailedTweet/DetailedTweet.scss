@@ -2,6 +2,8 @@
 
 .detailed-tweet {
     @include g.flex-column();
+    max-width: 600px;
+    margin: 0 auto;
     > header {
         display: flex;
         justify-content: flex-start;
@@ -146,5 +148,12 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .detailed-tweet {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
     }
 }

@@ -80,6 +80,7 @@
                 background: url('../../assets/images/options-dots.svg') no-repeat center;
                 background-size: 0.9rem;
                 border: none;
+                border-radius: 50%;
                 height: 0.9rem;
                 width: 0.9rem;
                 min-width: 0.9rem;
@@ -98,5 +99,12 @@
 @media screen and (min-width: 1200px) {
     .tweet:hover {
         cursor: pointer;
+    }
+    .tweet-user-name:hover {
+        text-decoration: underline;
+    }
+    .options:hover {
+        cursor: pointer;
+        background: url('../../assets/images/options-dots.svg') no-repeat center, #1a1a1a !important;
     }
 }

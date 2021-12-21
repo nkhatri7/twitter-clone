@@ -1,6 +1,8 @@
 @use '../../global' as g;
 
 .account-settings {
+    max-width: 600px;
+    margin: 0 auto;
     > .account-settings-main {
         width: 100%;
         padding: 1rem;
@@ -58,5 +60,13 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .account-settings {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        border-bottom: 1px solid g.$border-colour;
     }
 }

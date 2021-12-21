@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './ChangePassword.scss';
 import SettingsHeader from '../../components/SettingsHeader/SettingsHeader';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const ChangePassword = ({ activeUser, handleChangePassword }) => {
 
@@ -82,6 +83,7 @@ const ChangePassword = ({ activeUser, handleChangePassword }) => {
         <div className='change-password'>
             <SettingsHeader activeUser={activeUser} pageTitle={'Change your password'} />
             <main className="change-password-main">
+                <DesktopMenu activeUser={activeUser} page="Change Password" />
                 <div className="change-password-input-container current-password-container">
                     <input 
                         type="password" 

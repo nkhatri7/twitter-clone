@@ -7,6 +7,7 @@ import Tweet from '../../components/Tweet/Tweet';
 import Overlay from '../../components/Overlay/Overlay';
 import ShareTweet from '../../components/ShareTweet/ShareTweet';
 import TweetOptions from '../../components/TweetOptions/TweetOptions';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const Bookmarks = ({ 
     activeUser, 
@@ -123,6 +124,7 @@ const Bookmarks = ({
                 </button>
             </header>
             <main className="bookmarks-main">
+                <DesktopMenu activeUser={activeUser} page="Bookmarks" />
                 <div className="tweets-container">
                     {bookmarks ? getTweetsDisplay() : null}
                 </div>

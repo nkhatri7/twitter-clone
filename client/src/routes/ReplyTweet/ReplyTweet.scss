@@ -3,6 +3,8 @@
 .reply-tweet {
     > .reply-tweet-main {
         position: relative;
+        max-width: 600px;
+        margin: 0 auto;
         > .tweet {
             border-bottom: none;
             > .main-tweet-content {
@@ -86,5 +88,12 @@
             left: 2.2rem;
             top: 3.8rem;
         }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .reply-tweet-main > .tweet {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
     }
 }

@@ -1,6 +1,8 @@
 @use '../../global' as g;
 
 .compose-tweet-header {
+    max-width: 600px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,5 +28,12 @@
         &:disabled {
             opacity: 0.5;
         }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .compose-tweet-header {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
     }
 }

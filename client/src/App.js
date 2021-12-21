@@ -218,9 +218,9 @@ const App = () => {
         />
         <Route 
           path="/:username/status/:tweetId/reply"
-          element={<ReplyTweet handleReply={handleReply} />}  
+          element={<ReplyTweet activeUser={activeUser} handleReply={handleReply} />}  
         />
-        <Route path="/compose/tweet" element={<NewTweet handleNewTweet={handleNewTweet} />} />
+        <Route path="/compose/tweet" element={<NewTweet activeUser={activeUser} handleNewTweet={handleNewTweet} />} />
         <Route 
           path="/:username" 
           element={

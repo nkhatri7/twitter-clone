@@ -8,6 +8,8 @@
 }
 
 .profile-settings {
+    max-width: 600px;
+    margin: 0 auto;
     .profile-settings-header {
         display: flex;
         justify-content: space-between;
@@ -151,5 +153,19 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .profile-settings {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        border-bottom: 1px solid g.$border-colour;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .profile-settings-save-btn:hover {
+        cursor: pointer;
     }
 }

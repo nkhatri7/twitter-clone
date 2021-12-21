@@ -1,6 +1,8 @@
 @use '../../global' as g;
 
 .deactivate-account {
+    max-width: 600px;
+    margin: 0 auto;
     > .deactivate-account-main {
         .profile-container {
             display: flex;
@@ -120,4 +122,12 @@
             }
         }
     }
-}    
+}
+
+@media screen and (min-width: 800px) {
+    .deactivate-account {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        border-bottom: 1px solid g.$border-colour;
+    }
+}
