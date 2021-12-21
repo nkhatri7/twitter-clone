@@ -187,7 +187,8 @@ const App = () => {
           path="/home" 
           element={
             <Home 
-              activeUser={activeUser} 
+              activeUser={activeUser}
+              handleNewTweet={handleNewTweet}
               handleLike={handleLike} 
               handleUnlike={handleUnlike}
               handleRetweet={handleRetweet}

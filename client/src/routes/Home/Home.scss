@@ -2,7 +2,7 @@
 
 .home-wrapper {
     width: 100vw;
-    > main {
+    > .home-main {
         > .tweets-container {
             width: 100%;
             position: absolute;
@@ -14,14 +14,104 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
+            .desktop-heading {
+                display: none;
+            }
+            > .desktop-new-tweet-container {
+                display: none;
+            }
             > .no-more-tweets {
                 font-size: 1rem;
                 font-weight: 600;
                 color: #FFFFFF;
                 margin: 2rem auto;
                 width: 100%;
+                max-width: 600px;
                 text-align: center;
             }
+        }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .tweets-container {
+        position: relative !important;
+        top: 0 !important;
+        bottom: 0;
+        margin: 0 auto;
+        width: 600px !important;
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        > .desktop-heading-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            padding: 1rem 1rem 0.5rem 1rem;
+            > .desktop-heading {
+                display: block !important;
+                color: #FFFFFF;
+                font-size: 1.2rem;
+                font-weight: 800;
+            }
+        }
+        > .desktop-new-tweet-container {
+            @include g.flex-column();
+            display: flex !important;
+            width: 100%;
+            padding: 1rem;
+            border-bottom: 1px solid g.$border-colour;
+            > .flex-container {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                > .new-tweet-profile-pic {
+                    max-width: 2.5rem;
+                    border-radius: 50%;
+                }
+                > textarea {
+                    background-color: transparent;
+                    color: #FFFFFF;
+                    width: 100%;
+                    padding: 0.5rem;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    border: none;
+                    resize: none;
+                    &::placeholder {
+                        color: g.$secondary-text-colour;
+                    }
+                    &:focus {
+                        outline: none !important;
+                    }
+                }
+            }
+            > .desktop-new-tweet-btn-container {
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
+                > .desktop-new-tweet-btn {
+                    background-color: g.$primary-blue;
+                    color: #FFFFFF;
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    padding: 0.5rem 1rem;
+                    border: none;
+                    border-radius: 50px;
+                    &:disabled {
+                        opacity: 0.5;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .desktop-new-tweet-btn:hover {
+        cursor: pointer;
+        &:disabled:hover {
+            cursor: default;
         }
     }
 }

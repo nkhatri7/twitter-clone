@@ -1,0 +1,98 @@
+@use '../../global' as g;
+
+.desktop-menu {
+    @include g.flex-column();
+    position: fixed;
+    height: 100vh;
+    left: 5rem;
+    > .twitter-logo {
+        max-width: 2rem;
+        margin-top: 1rem;
+    }
+    > nav {
+        > ul {
+            @include g.flex-column();
+            > .desktop-menu-link-container {
+                list-style: none;
+                margin: 0.3rem 0;
+                > .desktop-menu-link {
+                    text-decoration: none;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    border-radius: 50px;
+                    padding: 0.8rem 1.5rem 0.8rem 0.5rem;
+                    > .svg-container {
+                        position: relative;
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        > svg {
+                            width: 1.5rem;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                        }
+                    }
+                    > .desktop-link-text {
+                        margin-left: 1rem;
+                        color: #FFFFFF;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+    > .tweet-btn {
+        background-color: g.$primary-blue;
+        color: #FFFFFF;
+        font-size: 1rem;
+        font-weight: 800;
+        padding: 1rem 0;
+        width: 12rem;
+        border: none;
+        border-radius: 50px;
+        margin-top: 1rem;
+    }
+    > .tablet-tweet-btn {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .desktop-menu {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .desktop-link-text {
+        display: none;
+    }
+    .tweet-btn {
+        display: none;
+    }
+    .tablet-tweet-btn {
+        display: block !important;
+        background-color: g.$primary-blue;
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 700;
+        height: 2.5rem;
+        width: 2.5rem;
+        border: none;
+        border-radius: 50%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .desktop-menu-link:hover {
+        background-color: #1a1a1a;
+        transition: 0.2s;
+    }
+
+    .tweet-btn:hover {
+        cursor: pointer;
+        opacity: 0.9;
+        transition: 0.2s;
+    }
+}

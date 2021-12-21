@@ -149,9 +149,8 @@ router.put('/:id/unfollow', async (req, res) => {
 // Get user tweets
 router.get('/:id/tweets', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
         const userTweets = await Tweet.find({
-            userId: user._id
+            userId: req.params.id
         });
         res.status(200).json([...userTweets]);
     } catch (err) {

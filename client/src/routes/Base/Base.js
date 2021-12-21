@@ -16,7 +16,7 @@ const Base = () => {
     }
 
     return (
-        <main>
+        <main className='base-main'>
             <div className="main-signup-login">
                 <h1 className="hidden">Twitter</h1>
                 <img src={twitterLogo} alt="Twitter logo" className="logo" />

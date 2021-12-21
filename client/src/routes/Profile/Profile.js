@@ -10,6 +10,7 @@ import ShareTweet from '../../components/ShareTweet/ShareTweet';
 import Tweet from '../../components/Tweet/Tweet';
 import TweetOptions from '../../components/TweetOptions/TweetOptions';
 import Overlay from '../../components/Overlay/Overlay';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const Profile = ({ 
     activeUser, 
@@ -216,114 +217,117 @@ const Profile = ({
 
     return (
         <div className='profile'>
-            <header className='profile-header'>
-                <button className="back-btn" aria-label='Go back' onClick={() => navigate(-1)}>
-                    <span className='hidden'>Back</span>
-                </button>
-                <div className="profile-header-user-details">
-                    <span className="profile-header-user-name">{user ? user.displayName : ''}</span>
-                    <span className="profile-header-tweet-count">{user ? `${user.tweets.length} Tweets` : ''}</span>
-                </div>
-            </header>
-            <main className="profile-main">
-                <div className="profile-main-wrapper">
-                    <div className="profile-main-container">
-                        <div className="profile-cover-photo"></div>
-                        <div className="profile-details">
-                            <div className="profile-details-header">
-                                <img src={profilePic} alt="" className="profile-pic" />
-                                {
-                                    user === null ? null 
-                                        : (user._id === activeUser._id) ?
-                                            <button 
-                                                className="edit-account-btn" 
-                                                onClick={() => navigate('/settings/profile')}
-                                            >Edit profile</button> 
-                                        : 
-                                            <button 
-                                                className={
-                                                    `follow-btn ${activeUser.following.includes(user._id) ? `following` : `follow`}`
-                                                }
-                                                onClick={handleFollowEvent}
-                                            >
-                                            {activeUser.following.includes(user._id) ? 'Following' : 'Follow'}
-                                            </button>
-                                }
-                            </div>
-                            <span className="profile-display-name">{user ? user.displayName : ''}</span>
-                            <div className="profile-username-container">
-                                <span className="profile-username">@{user ? user.username : ''}</span>
-                                {user === null ? null : (user.following.includes(activeUser._id)) ? 
-                                    <div className="follows-you-tag">Follows you</div> : null
-                                }
-                            </div>
-                            { user === null ? null : (user.bio) ? <span className="profile-bio">{user.bio}</span> : null }
-                            <div className="joined-date">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6F767C">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span>Joined {user ? getJoinedDate() : ''}</span>
-                            </div>
-                            <div className="profile-network-container">
-                                <div className="profile-network">
-                                    <span className="profile-network-number">{user ? user.following.length : ''}</span>
-                                    Following
+            <div className="profile-wrapper">
+                <header className='profile-header'>
+                    <button className="back-btn" aria-label='Go back' onClick={() => navigate(-1)}>
+                        <span className='hidden'>Back</span>
+                    </button>
+                    <div className="profile-header-user-details">
+                        <span className="profile-header-user-name">{user ? user.displayName : ''}</span>
+                        <span className="profile-header-tweet-count">{user ? `${user.tweets.length} Tweets` : ''}</span>
+                    </div>
+                </header>
+                <main className="profile-main">
+                    <div className="profile-main-wrapper">
+                        <DesktopMenu activeUser={activeUser} page={activeUser === user ? 'Profile' : 'Other User Profile'} />
+                        <div className="profile-main-container">
+                            <div className="profile-cover-photo"></div>
+                            <div className="profile-details">
+                                <div className="profile-details-header">
+                                    <img src={profilePic} alt="" className="profile-pic" />
+                                    {
+                                        user === null ? null 
+                                            : (user._id === activeUser._id) ?
+                                                <button 
+                                                    className="edit-account-btn" 
+                                                    onClick={() => navigate('/settings/profile')}
+                                                >Edit profile</button> 
+                                            : 
+                                                <button 
+                                                    className={
+                                                        `follow-btn ${activeUser.following.includes(user._id) ? `following` : `follow`}`
+                                                    }
+                                                    onClick={handleFollowEvent}
+                                                >
+                                                {activeUser.following.includes(user._id) ? 'Following' : 'Follow'}
+                                                </button>
+                                    }
                                 </div>
-                                <div className="profile-network">
-                                    <span className="profile-network-number">{user ? user.followers.length : ''}</span>
-                                    Followers
+                                <span className="profile-display-name">{user ? user.displayName : ''}</span>
+                                <div className="profile-username-container">
+                                    <span className="profile-username">@{user ? user.username : ''}</span>
+                                    {user === null ? null : (user.following.includes(activeUser._id)) ? 
+                                        <div className="follows-you-tag">Follows you</div> : null
+                                    }
                                 </div>
+                                { user === null ? null : (user.bio) ? <span className="profile-bio">{user.bio}</span> : null }
+                                <div className="joined-date">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6F767C">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <span>Joined {user ? getJoinedDate() : ''}</span>
+                                </div>
+                                <div className="profile-network-container">
+                                    <div className="profile-network">
+                                        <span className="profile-network-number">{user ? user.following.length : ''}</span>
+                                        Following
+                                    </div>
+                                    <div className="profile-network">
+                                        <span className="profile-network-number">{user ? user.followers.length : ''}</span>
+                                        Followers
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="profile-tabs">
+                                <button 
+                                    className="profile-tab" 
+                                    ref={tweetTab} 
+                                    onClick={() => setActiveTab(tweetTab)}
+                                >Tweets</button>
+                                <button 
+                                    className="profile-tab" 
+                                    ref={repliesTab}
+                                    onClick={() => setActiveTab(repliesTab)}
+                                >Tweets &amp; replies</button>
+                                <button 
+                                    className="profile-tab" 
+                                    ref={mediaTab}
+                                    onClick={() => setActiveTab(mediaTab)}
+                                >Media</button>
+                                <button 
+                                    className="profile-tab" 
+                                    ref={likesTab}
+                                    onClick={() => setActiveTab(likesTab)}
+                                >Likes</button>
                             </div>
                         </div>
-                        <div className="profile-tabs">
-                            <button 
-                                className="profile-tab" 
-                                ref={tweetTab} 
-                                onClick={() => setActiveTab(tweetTab)}
-                            >Tweets</button>
-                            <button 
-                                className="profile-tab" 
-                                ref={repliesTab}
-                                onClick={() => setActiveTab(repliesTab)}
-                            >Tweets &amp; replies</button>
-                            <button 
-                                className="profile-tab" 
-                                ref={mediaTab}
-                                onClick={() => setActiveTab(mediaTab)}
-                            >Media</button>
-                            <button 
-                                className="profile-tab" 
-                                ref={likesTab}
-                                onClick={() => setActiveTab(likesTab)}
-                            >Likes</button>
+                        <div className="tweets-container">
+                            { tweets ? getTweetsDisplay() : null}
                         </div>
+                        <NewTweetButton />
                     </div>
-                    <div className="tweets-container">
-                        { tweets ? getTweetsDisplay() : null}
-                    </div>
-                    <NewTweetButton />
-                </div>
-                {optionsDisplay === false ? null :
-                    <TweetOptions 
-                        handleOptionsView={handleOptionsView} 
-                        tweet={tweetOptions} 
-                        handleDeleteTweet={handleDeleteTweet}
-                        handleDeleteReply={handleDeleteReply}
-                    />
-                }
-                {optionsDisplay || shareDisplay ? <Overlay /> : null}
-                {shareDisplay === false ? null :
-                    <ShareTweet
-                        tweet={tweetShare.tweet}
-                        user={tweetShare.user}
-                        activeUser={activeUser}
-                        handleShareView={handleShareView}
-                        handleBookmark={handleBookmark}
-                        handleRemoveBookmark={handleRemoveBookmark}
-                    />
-                }
-            </main>
-            <MobileFooterMenu page="profile" />
+                    {optionsDisplay === false ? null :
+                        <TweetOptions 
+                            handleOptionsView={handleOptionsView} 
+                            tweet={tweetOptions} 
+                            handleDeleteTweet={handleDeleteTweet}
+                            handleDeleteReply={handleDeleteReply}
+                        />
+                    }
+                    {optionsDisplay || shareDisplay ? <Overlay /> : null}
+                    {shareDisplay === false ? null :
+                        <ShareTweet
+                            tweet={tweetShare.tweet}
+                            user={tweetShare.user}
+                            activeUser={activeUser}
+                            handleShareView={handleShareView}
+                            handleBookmark={handleBookmark}
+                            handleRemoveBookmark={handleRemoveBookmark}
+                        />
+                    }
+                </main>
+                <MobileFooterMenu page="profile" />
+            </div>
         </div>
     );
 }

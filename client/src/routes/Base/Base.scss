@@ -11,7 +11,7 @@ body {
     align-items: flex-start;
 }
 
-main {
+.base-main {
     color: rgb(217, 217, 217);
     @include flex-column();
     > .main-signup-login {
@@ -102,7 +102,7 @@ main {
 }
 
 @media screen and (min-width: 1000px) {
-    main {
+    .base-main {
         flex-direction: row-reverse;
         .main-signup-login {
             min-width: 40rem;

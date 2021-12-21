@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.scss';
+import profilePic from '../../assets/images/default-profile-pic.png';
 import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu';
 import MobileHeader from '../../components/MobileHeader/MobileHeader';
 import Tweet from '../../components/Tweet/Tweet';
@@ -8,9 +9,11 @@ import TweetOptions from '../../components/TweetOptions/TweetOptions';
 import Overlay from '../../components/Overlay/Overlay';
 import NewTweetButton from '../../components/NewTweetButton/NewTweetButton';
 import ShareTweet from '../../components/ShareTweet/ShareTweet';
+import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
 const Home = ({ 
-    activeUser, 
+    activeUser,
+    handleNewTweet,
     handleLike, 
     handleUnlike, 
     handleRetweet, 
@@ -22,6 +25,8 @@ const Home = ({
 
     const [tweets, setTweets] = useState([]);
     const [users, setUsers] = useState([]);
+    const [newTweetText, setNewTweetText] = useState('');
+    const [disabled, setDisabled] = useState(true);
     const [optionsDisplay, setOptionsDisplay] = useState(false);
     const [tweetOptions, setTweetOptions] = useState(null);
     const [shareDisplay, setShareDisplay] = useState(false);
@@ -48,6 +53,26 @@ const Home = ({
                 .catch(err => console.log(err));
         });
     }, [tweets]);
+
+    useEffect(() => {
+        if (newTweetText.trim() === '' || newTweetText.trim().length > 280) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [newTweetText]);
+
+    const handleNewTweetTextChange = (e) => {
+        setNewTweetText(e.target.value);
+
+        e.target.style.height = 'auto';
+        e.target.style.height = `${e.target.scrollHeight}px`;
+    }
+
+    const handleNewTweetClick = () => {
+        handleNewTweet(newTweetText);
+        setNewTweetText('');
+    }
 
     const handleTweetOptionsEvent = (tweet) => {
         setTweetOptions(tweet);
@@ -94,8 +119,29 @@ const Home = ({
         <div className="home">
             <div className="home-wrapper">
                 <MobileHeader page="Home" activeUser={activeUser} />
-                <main className="tweets-container">
+                <main className="home-main">
+                    <DesktopMenu activeUser={activeUser} page="Home" />
                     <div className="tweets-container">
+                        <div className="desktop-heading-container">
+                            <span className="desktop-heading">Home</span>
+                        </div>
+                        <div className="desktop-new-tweet-container">
+                            <div className="flex-container">
+                                <img src={profilePic} alt="" className='new-tweet-profile-pic' />
+                                <textarea 
+                                    placeholder="What's happening?" 
+                                    value={newTweetText} 
+                                    onChange={handleNewTweetTextChange} 
+                                />
+                            </div>
+                            <div className="desktop-new-tweet-btn-container">
+                                <button 
+                                    className="desktop-new-tweet-btn" 
+                                    disabled={disabled}
+                                    onClick={handleNewTweetClick}
+                                >Tweet</button>
+                            </div>
+                        </div>
                         {tweets.length > 0 ? tweetsDisplay : null}
                         <div className="no-more-tweets">No more tweets</div>
                     </div>

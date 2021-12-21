@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: flex-start;
     width: 100%;
+    max-width: 600px;
     padding: 1rem;
     border-bottom: 1px solid g.$border-colour;
     > .tweet-profile-pic {
@@ -91,5 +92,11 @@
             color: #FFFFFF;
             width: 100%;
         }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .tweet:hover {
+        cursor: pointer;
     }
 }

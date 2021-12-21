@@ -12,3 +12,9 @@
     font-size: 3rem;
     background-color: g.$primary-blue;
 }
+
+@media screen and (min-width: 800px) {
+    .new-tweet-btn {
+        display: none;
+    }
+}
