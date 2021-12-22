@@ -25,6 +25,7 @@ import ChangeEmail from './routes/ChangeEmail/ChangeEmail';
 import Bookmarks from './routes/Bookmarks/Bookmarks';
 import Followers from './routes/Followers/Followers';
 import Following from './routes/Following/Following';
+import ComingSoon from './components/ComingSoon/ComingSoon';
 
 const App = () => {
 
@@ -314,6 +315,7 @@ const App = () => {
             />
           }
         />
+        <Route path="*" element={<ComingSoon activeUser={activeUser} />} />
       </Routes>
     </Router>
   );
