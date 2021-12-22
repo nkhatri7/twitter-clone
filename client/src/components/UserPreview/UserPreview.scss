@@ -1,0 +1,91 @@
+@use '../../global' as g;
+
+.user-preview {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1rem;
+    overflow-x: hidden;
+    > .user-preview-profile-pic {
+        max-width: 2.5rem;
+        border-radius: 50%;
+    }
+    > .user-preview-container {
+        @include g.flex-column();
+        margin-left: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        > .user-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(100vw - 2rem - 2.5rem - 0.5rem);
+            > .user-preview-header-text {
+                @include g.flex-column();
+                max-width: 62%;
+                > .user-name {
+                    color: #FFFFFF;
+                    font-size: 1rem;
+                    font-weight: 700;
+                }
+                > .user-username-container {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    width: 100%;
+                    > .user-username {
+                        color: g.$secondary-text-colour;
+                        font-size: 0.9rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    > .follows-you-tag {
+                        color: g.$secondary-text-colour;
+                        font-size: 0.8rem;
+                        padding: 0.1rem 0.2rem;
+                        background-color: #292929;
+                        border-radius: 5px;
+                        margin-left: 0.5rem;
+                        min-width: max-content;
+                    }
+                }
+            }
+            > .following-btn, .follow-btn {
+                padding: 0.5rem 1rem;
+                border-radius: 50px;
+                font-size: 0.85rem;
+                font-weight: 700;
+            }
+            > .following-btn {
+                background-color: #000000;
+                color: #FFFFFF;
+                border: 1px solid g.$border-colour;
+            }
+            > .follow-btn {
+                background-color: #FFFFFF;
+                color: #000000;
+                border: none;
+            }
+        }
+        > .user-preview-main {
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            max-width: 100%;
+            padding-top: 0.3rem;
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .user-preview-header {
+        max-width: calc(600px - 2rem - 2.5rem - 0.5rem) !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .user-preview:hover {
+        cursor: pointer;
+    }
+}

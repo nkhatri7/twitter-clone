@@ -268,13 +268,13 @@ const Profile = ({
                                     <span>Joined {user ? getJoinedDate() : ''}</span>
                                 </div>
                                 <div className="profile-network-container">
-                                    <div className="profile-network">
+                                    <div className="profile-network" onClick={() => navigate(`/${user.username}/following`)}>
                                         <span className="profile-network-number">{user ? user.following.length : ''}</span>
-                                        Following
+                                        &nbsp;Following
                                     </div>
-                                    <div className="profile-network">
+                                    <div className="profile-network" onClick={() => navigate(`/${user.username}/followers`)}>
                                         <span className="profile-network-number">{user ? user.followers.length : ''}</span>
-                                        Followers
+                                        &nbsp;Followers
                                     </div>
                                 </div>
                             </div>

@@ -28,11 +28,11 @@ const MobileMenu = ({ handleMobileMenuToggle, activeUser }) => {
                         <span className="menu-username">@{activeUser ? activeUser.username : ''}</span>
                     </div>
                     <div className="mobile-menu-network-container">
-                        <p className="mobile-menu-network-detail">
+                        <p className="mobile-menu-network-detail" onClick={() => navigate(`/${activeUser.username}/following`)}>
                             {activeUser ? activeUser.following.length : ''}
                             <span>Following</span>
                         </p>
-                        <p className="mobile-menu-network-detail">
+                        <p className="mobile-menu-network-detail" onClick={() => navigate(`/${activeUser.username}/followers`)}>
                             {activeUser ? activeUser.followers.length : ''}
                             <span>Followers</span>
                         </p>

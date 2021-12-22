@@ -1,0 +1,78 @@
+@use '../../global' as g;
+
+.user-network {
+    @include g.flex-column();
+    max-width: 600px;
+    margin: 0 auto;
+    > .user-network-header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.7rem 1rem;
+        > .back {
+            background: url('../../assets/images/left-arrow.svg') no-repeat center;
+            background-size: 1rem;
+            height: 1rem;
+            width: 1.2rem;
+            border: none;
+            > .hidden {
+                display: none;
+            }
+        }
+        > .user-network-header-content {
+            @include g.flex-column();
+            margin-left: 2.2rem;
+            > .user-name {
+                color: #FFFFFF;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+            > .user-username {
+                color: g.$secondary-text-colour;
+                font-size: 0.8rem;
+            }
+        }
+    }
+    > .user-network-main {
+        @include g.flex-column();
+        width: 100%;
+        > .network-toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid g.$border-colour;
+            width: 100%;
+            padding: 0 4rem;
+            > .network-toggle-btn {
+                background-color: #000000;
+                color: g.$secondary-text-colour;
+                font-size: 0.9rem;
+                font-weight: 800;
+                padding: 1rem 0;
+                border: none;
+            }
+            > .active-tab {
+                border-bottom: 4px solid g.$primary-blue;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .user-network {
+        border-left: 1px solid g.$border-colour;
+        border-right: 1px solid g.$border-colour;
+        border-bottom: 1px solid g.$border-colour;
+        .network-toggle-container {
+            padding: 0 6rem !important;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .network-toggle-btn:hover {
+        color: #FFFFFF !important;
+        transition: 0.5s;
+    }
+}

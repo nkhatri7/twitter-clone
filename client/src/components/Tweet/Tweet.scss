@@ -14,10 +14,7 @@
         margin-right: 1rem;
     }
     > .main-tweet-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+        @include g.flex-column();
         width: 100%;
         max-width: 100%;
         overflow-x: hidden;
@@ -28,10 +25,7 @@
             width: 100%;
             margin-bottom: 0.2rem;
             > .tweet-header-main-container {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
+                @include g.flex-column();
                 max-width: 87%;
                 .tweet-header-main {
                     width: 100%;

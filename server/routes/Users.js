@@ -8,7 +8,7 @@ router.get('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         // Hide details that another user doesn't need to see
-        const { email, password, isAdmin, updatedAt, ...otherDetails } = user._doc;
+        const { email, password, bookmarks, isAdmin, updatedAt, ...otherDetails } = user._doc;
         res.status(200).json(otherDetails);
     } catch (err) {
         res.status(500).json(err);
@@ -216,6 +216,42 @@ router.put('/:id/bookmarks/clear', async (req, res) => {
             $set: { bookmarks: [] }
         }, { new: true });
         res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Get user followers
+router.get('/:id/followers', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        const followers = [];
+        user.followers.forEach(async (userId, idx, array) => {
+            const follower = await User.findById(userId);
+            const { email, password, bookmarks, isAdmin, updatedAt, ...otherDetails } = follower._doc;
+            followers.push(otherDetails);
+            if (followers.length === array.length) {
+                res.status(200).json(followers);
+            }
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Get user following
+router.get('/:id/following', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        const following = [];
+        user.following.forEach(async (userId, idx, array) => {
+            const user = await User.findById(userId);
+            const { email, password, bookmarks, isAdmin, updatedAt, ...otherDetails } = user._doc;
+            following.push(otherDetails);
+            if (following.length === array.length) {
+                res.status(200).json(following);
+            }
+        });
     } catch (err) {
         res.status(500).json(err);
     }

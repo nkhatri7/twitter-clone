@@ -23,6 +23,8 @@ import AccountInformation from './routes/AccountInformation/AccountInformation';
 import ChangeUsername from './routes/ChangeUsername/ChangeUsername';
 import ChangeEmail from './routes/ChangeEmail/ChangeEmail';
 import Bookmarks from './routes/Bookmarks/Bookmarks';
+import Followers from './routes/Followers/Followers';
+import Following from './routes/Following/Following';
 
 const App = () => {
 
@@ -238,6 +240,14 @@ const App = () => {
               handleRemoveBookmark={handleRemoveBookmark}
             />
           } 
+        />
+        <Route 
+          path="/:username/followers" 
+          element={<Followers activeUser={activeUser} handleFollow={handleFollowUser} handleUnfollow={handleUnfollowUser} />} 
+        />
+        <Route 
+          path="/:username/following" 
+          element={<Following activeUser={activeUser} handleFollow={handleFollowUser} handleUnfollow={handleUnfollowUser} />} 
         />
         <Route path="/explore" element={<Explore activeUser={activeUser} />} />
         <Route path="/notifications" element={<Notifications activeUser={activeUser} />} />

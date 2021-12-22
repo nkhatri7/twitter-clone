@@ -160,7 +160,6 @@
                             > .profile-network-number {
                                 color: #FFFFFF;
                                 font-weight: 700;
-                                margin-right: 0.2rem;
                             }
                         }
                     }
@@ -256,5 +255,10 @@
     }
     .back-btn:hover {
         cursor: pointer;
+    }
+    .profile-network:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-color: #FFFFFF;
     }
 }
