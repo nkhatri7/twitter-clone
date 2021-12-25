@@ -99,11 +99,75 @@
                 background-color: g.$secondary-text-colour;
             }
         }
-        > .tweet-footer-container {
-            padding: 0.2rem 1.5rem 1rem 1.5rem;
+        > .tweet-interactions-container {
             width: 100%;
-            border-top: 1px solid g.$border-colour;
-            border-bottom: 1px solid g.$border-colour;
+            @include g.flex-column();
+            > .detailed-tweet-interactions-wrapper {
+                width: 100%;
+                padding: 0 1rem;
+                > .detailed-tweet-interactions-container {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    border-top: 1px solid g.$border-colour;
+                    padding: 1rem 0.5rem;
+                    > .detailed-tweet-interaction-container {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        &:first-child {
+                            margin-right: 1rem;
+                        }
+                        color: g.$secondary-text-colour;
+                        > .detailed-tweet-interaction-number {
+                            color: #FFFFFF;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+            > .detailed-tweet-footer-container {
+                padding: 0 1rem;
+                width: 100%;
+                > .detailed-tweet-footer {
+                    padding: 0.8rem 1.5rem;
+                    width: 100%;
+                    border-top: 1px solid g.$border-colour;
+                    border-bottom: 1px solid g.$border-colour;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    > .tweet-action {
+                        background-size: 1.5rem;
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        border: none;
+                        > .hidden {
+                            display: none;
+                        }
+                    }
+                    > .reply-btn {
+                        background: url('../../assets/images/reply.svg') no-repeat center;
+                    }
+                    > .retweet-btn {
+                        background: url('../../assets/images/retweet.svg') no-repeat center;
+                    }
+                    .retweeted {
+                        background: url('../../assets/images/retweeted.svg') no-repeat;
+                        color: #53B681;
+                    }
+                    > .like-btn {
+                        background: url('../../assets/images/like.svg') no-repeat center;
+                    }
+                    .liked {
+                        background: url('../../assets/images/liked.svg') no-repeat;
+                        color: #E5397F;
+                    }
+                    > .share-btn {
+                        background: url('../../assets/images/share.svg') no-repeat center;
+                    }
+                }
+            }
         }
         > .reply-container {
             display: flex;
@@ -155,5 +219,38 @@
     .detailed-tweet {
         border-left: 1px solid g.$border-colour;
         border-right: 1px solid g.$border-colour;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .tweet-action:hover, .share-button:hover {
+        cursor: pointer;
+    }
+    .reply-button:hover {
+        background: url('../../assets/images/reply-hover.svg') no-repeat center;
+        background-position: 0% 50%;
+        color: g.$primary-blue;
+        transition: 0.3s;
+    }
+    .retweet-button:not(.retweeted):hover {
+        background: url('../../assets/images/retweet-hover.svg') no-repeat center;
+        background-position: 0% 50%;
+        color: #53B681;
+        transition: 0.3s;
+    }
+    .like-button:not(.liked):hover {
+        background: url('../../assets/images/like-hover.svg') no-repeat center;
+        background-position: 0% 50%;
+        color: #E5397F;
+        transition: 0.3s;
+    }
+    .share-button:hover {
+        background: url('../../assets/images/share-hover.svg') no-repeat center;
+        transition: 0.3s;
+    }
+    .detailed-tweet-interaction-container:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-color: #FFFFFF;
     }
 }

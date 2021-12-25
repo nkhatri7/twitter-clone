@@ -245,4 +245,38 @@ router.put('/:id/bookmark/remove', async (req, res) => {
     }
 });
 
+// Get users that have liked tweet
+router.get('/:id/likes', async (req, res) => {
+    try {
+        const tweet = await Tweet.findById(req.params.id);
+        const users = [];
+        tweet.likes.forEach(async (userId, idx, array) => {
+            const user = await User.findById(userId);
+            users.push(user);
+            if (users.length === array.length) {
+                res.status(200).json(users);
+            }
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Get users that have retweeted tweet
+router.get('/:id/retweets', async (req, res) => {
+    try {
+        const tweet = await Tweet.findById(req.params.id);
+        const users = [];
+        tweet.retweets.forEach(async (userId, idx, array) => {
+            const user = await User.findById(userId);
+            users.push(user);
+            if (users.length === array.length) {
+                res.status(200).json(users);
+            }
+        })
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

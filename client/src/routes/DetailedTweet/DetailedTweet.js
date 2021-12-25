@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import axios from 'axios';
 import './DetailedTweet.scss';
@@ -7,7 +7,6 @@ import MobileFooterMenu from '../../components/MobileFooterMenu/MobileFooterMenu
 import TweetOptions from '../../components/TweetOptions/TweetOptions';
 import Overlay from '../../components/Overlay/Overlay';
 import ShareTweet from '../../components/ShareTweet/ShareTweet';
-import TweetFooter from '../../components/TweetFooter/TweetFooter';
 import Tweet from '../../components/Tweet/Tweet';
 import DesktopMenu from '../../components/DesktopMenu/DesktopMenu';
 
@@ -36,6 +35,8 @@ const DetailedTweet = ({
     const [tweetOptions, setTweetOptions] = useState(null);
     const [shareDisplay, setShareDisplay] = useState(false);
     const [tweetShare, setTweetShare] = useState(null);
+    const likeButton = useRef(null);
+    const retweetButton = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -83,6 +84,54 @@ const DetailedTweet = ({
     useEffect(() => {
         replyText || replyText.length > 280 ? setDisabled(false) : setDisabled(true);
     }, [replyText]);
+
+    useEffect(() => {
+        if (tweet && activeUser) {
+            const liked = checkLiked();
+            if (liked) {
+                likeButton.current.classList.add('liked');
+            } else {
+                likeButton.current.classList.remove('liked');
+            }
+
+            const retweeted = checkRetweeted();
+            if (retweeted) {
+                retweetButton.current.classList.add('retweeted');
+            } else {
+                retweetButton.current.classList.remove('retweeted');
+            }
+        }
+    });
+
+    const checkLiked = () => {
+        const userLikes = activeUser.likes;
+        const liked = userLikes.includes(tweetId);
+        return liked;
+    }
+
+    const checkRetweeted = () => {
+        const userRetweets = activeUser.retweets;
+        const retweeted = userRetweets.includes(tweetId);
+        return retweeted;
+    }
+
+    const handleLikeEvent = () => {
+        const liked = checkLiked();
+        if (liked) {
+            handleUnlike(tweet._id);
+        } else {
+            handleLike(tweet._id);
+        }
+    }
+
+    const handleRetweetEvent = () => {
+        const retweeted = checkRetweeted();
+        if (retweeted) {
+            handleRemoveRetweet(tweet._id);
+        } else {
+            handleRetweet(tweet._id);
+        }
+    }
 
     const handleTweetOptionsEvent = (tweet) => {
         setTweetOptions(tweet);
@@ -191,17 +240,65 @@ const DetailedTweet = ({
                     <div className="separator"></div>
                     <span className="tweet-date">{tweet ? tweetDate() : null}</span>
                 </div>
-                <div className="tweet-footer-container">
-                    {tweet ? <TweetFooter 
-                        tweet={tweet ? tweet : null}
-                        user={user ? user : null}
-                        activeUser={activeUser} 
-                        handleLike={handleLike} 
-                        handleUnlike={handleUnlike} 
-                        handleRetweet={handleRetweet} 
-                        handleRemoveRetweet={handleRemoveRetweet}
-                        handleShareTweet={handleShareTweetEvent}
-                    /> : null}
+                <div className="tweet-interactions-container">
+                    {tweet ? (tweet.retweets.length > 0 || tweet.likes.length > 0) ? 
+                        <div className="detailed-tweet-interactions-wrapper">
+                            <div className="detailed-tweet-interactions-container">
+                            {tweet.retweets.length === 0 ? null :
+                                <div 
+                                    className="detailed-tweet-interaction-container"
+                                    onClick={() => navigate(`/${user.username}/status/${tweetId}/retweets`)}
+                                >
+                                    <span className="detailed-tweet-interaction-number">{tweet.retweets.length}</span>
+                                    &nbsp;{tweet.retweets.length > 1 ? 'Retweets' : 'Retweet'}
+                                </div>
+                            }
+                            {tweet.likes.length === 0 ? null : 
+                                <div 
+                                    className="detailed-tweet-interaction-container"
+                                    onClick={() => navigate(`/${user.username}/status/${tweetId}/likes`)}
+                                >
+                                    <span className="detailed-tweet-interaction-number">{tweet.likes.length}</span>
+                                    &nbsp;{tweet.likes.length > 1 ? 'Likes' : 'Like'}
+                                </div>
+                            }
+                        </div>
+                        </div> : null : null
+                    }
+                    <div className="detailed-tweet-footer-container">
+                        <div className="detailed-tweet-footer">
+                            <button 
+                                className="tweet-action reply-btn" 
+                                aria-label='Reply to tweet' 
+                                onClick={() => navigate(`/${user.username}/status/${tweetId}/reply`)}
+                            >
+                                <span className="hidden">Reply</span>
+                            </button>
+                            <button 
+                                className="tweet-action retweet-btn" 
+                                aria-label='Retweet' 
+                                onClick={handleRetweetEvent}
+                                ref={retweetButton}
+                            >
+                                <span className="hidden">Retweet</span>
+                            </button>
+                            <button 
+                                className="tweet-action like-btn" 
+                                aria-label='Like tweet' 
+                                onClick={handleLikeEvent}
+                                ref={likeButton}
+                            >
+                                <span className="hidden">Like</span>
+                            </button>
+                            <button 
+                                className="tweet-action share-btn" 
+                                aria-label='Share tweet' 
+                                onClick={() => handleShareTweetEvent(tweet, user)}
+                            >
+                                <span className="hidden">Share</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div className="reply-container">
                     <img src={profilePic} alt="" className="active-user-profile-pic"/>

@@ -26,6 +26,8 @@ import Bookmarks from './routes/Bookmarks/Bookmarks';
 import Followers from './routes/Followers/Followers';
 import Following from './routes/Following/Following';
 import ComingSoon from './components/ComingSoon/ComingSoon';
+import DetailedTweetLikes from './routes/DetailedTweetLikes/DetailedTweetLikes';
+import DetailedTweetRetweets from './routes/DetailedTweetRetweets/DetailedTweetRetweets';
 
 const App = () => {
 
@@ -218,6 +220,22 @@ const App = () => {
               handleRemoveBookmark={handleRemoveBookmark}
             />
           }
+        />
+        <Route 
+          path="/:username/status/:tweetId/retweets"
+          element={<DetailedTweetRetweets 
+            activeUser={activeUser}
+            handleFollow={handleFollowUser}
+            handleUnfollow={handleUnfollowUser}
+          />}
+        />
+        <Route 
+          path="/:username/status/:tweetId/likes"
+          element={<DetailedTweetLikes 
+            activeUser={activeUser}
+            handleFollow={handleFollowUser}
+            handleUnfollow={handleUnfollowUser}
+          />}
         />
         <Route 
           path="/:username/status/:tweetId/reply"
