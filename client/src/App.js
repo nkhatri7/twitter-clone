@@ -10,7 +10,7 @@ import Login from './routes/Login/Login';
 import Messages from './routes/Messages/Messages';
 import Notifications from './routes/Notifications/Notifications';
 import SignUp from './routes/SignUp/SignUp';
-import NewTweet from './routes/NewTweet/NewTweet';
+import ComposeTweet from './routes/ComposeTweet/ComposeTweet';
 import DetailedTweet from './routes/DetailedTweet/DetailedTweet';
 import ReplyTweet from './routes/ReplyTweet/ReplyTweet';
 import Profile from './routes/Profile/Profile';
@@ -241,7 +241,7 @@ const App = () => {
           path="/:username/status/:tweetId/reply"
           element={<ReplyTweet activeUser={activeUser} handleReply={handleReply} />}  
         />
-        <Route path="/compose/tweet" element={<NewTweet activeUser={activeUser} handleNewTweet={handleNewTweet} />} />
+        <Route path="/compose/tweet" element={<ComposeTweet activeUser={activeUser} handleNewTweet={handleNewTweet} />} />
         <Route 
           path="/:username" 
           element={

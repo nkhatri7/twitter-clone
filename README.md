@@ -16,7 +16,7 @@ This is a pretty basic version of twitter, since it's my first fullstack project
 ## Functionalities
 - Create account
 - Sign in with email or username
-- Create, edit, and delete tweet
+- Create and delete tweet
 - Reply to tweet
 - Like tweet
 - Retweet
